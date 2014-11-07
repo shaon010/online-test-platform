@@ -1,0 +1,10 @@
+0:0:0:0:0:0:0:1 - - [19/Sep/2014:15:09:00 +0600] "GET /online-quiz-portal HTTP/1.1" 302 - http-bio-8080-exec-1 0
+0:0:0:0:0:0:0:1 - - [19/Sep/2014:15:09:03 +0600] "GET /online-quiz-portal/ HTTP/1.1" 200 7244 http-bio-8080-exec-2 2882
+0:0:0:0:0:0:0:1 - - [19/Sep/2014:15:09:03 +0600] "GET /resources/custom.css HTTP/1.1" 404 - http-bio-8080-exec-3 0
+0:0:0:0:0:0:0:1 - - [19/Sep/2014:15:09:03 +0600] "GET /resources/images/database.jpg HTTP/1.1" 404 - http-bio-8080-exec-5 0
+0:0:0:0:0:0:0:1 - - [19/Sep/2014:15:09:08 +0600] "GET /resources/images/database.jpg HTTP/1.1" 404 - http-bio-8080-exec-6 0
+0:0:0:0:0:0:0:1 - - [19/Sep/2014:15:10:06 +0600] "GET /resources/custom.css HTTP/1.1" 404 - http-bio-8080-exec-7 0
+0:0:0:0:0:0:0:1 - - [19/Sep/2014:15:10:25 +0600] "GET /resources/images/database.jpg HTTP/1.1" 404 - http-bio-8080-exec-8 0
+0:0:0:0:0:0:0:1 - - [19/Sep/2014:15:10:50 +0600] "GET /resources/images/database.jpg HTTP/1.1" 404 - http-bio-8080-exec-9 0
+0:0:0:0:0:0:0:1 - - [19/Sep/2014:15:12:29 +0600] "GET /online-quiz-portal/ HTTP/1.1" 500 30337 http-bio-8080-exec-1 778
+0:0:0:0:0:0:0:1 - - [19/Sep/2014:15:12:38 +0600] "GET / HTTP/1.1" 404 - http-bio-8080-exec-2 0
