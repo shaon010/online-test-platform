@@ -70,8 +70,11 @@ public class CourseController {
 	
 	@RequestMapping("/aboutcourse/{id}")
 	public String aboutCourseShow(Model model,Principal principal,@PathVariable int id) {
+		String name=null;
 		model.addAttribute("course", courseService.findById(id));
-		String name=principal.getName();
+		if(principal!=null){
+		name=principal.getName();
+		}
 		model.addAttribute("request",courseService.findByUserFromRequest(name,id));
 		return "aboutcourse";
 	}
@@ -92,6 +95,7 @@ public class CourseController {
 	public String sendJoinRequest(Model model, Principal principal,@PathVariable int id) {
 		String name=principal.getName();
 		courseService.saveJoinRequest(id,name);
+		courseService.saveCourseStudent(id,name);
 		//model.addAttribute("course", courseService.findById(id));
 		//model.addAttribute("request",courseService.findByUserFromRequest(name));
 		//model.addAttribute("course",courseService.getAllCourse() );

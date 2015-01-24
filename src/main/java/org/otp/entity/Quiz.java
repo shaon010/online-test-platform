@@ -8,7 +8,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import org.hsqldb.rights.User;
 
 
 @Entity
@@ -28,6 +32,10 @@ public class Quiz {
 	
 	private int duration;
 	private double point;
+	
+	@ManyToOne
+	@JoinColumn(name = "course_id")
+	private Course course;
 	
 	@OneToMany(mappedBy = "quiz", cascade = CascadeType.REMOVE)
 	private List<Mcq> mcqList;

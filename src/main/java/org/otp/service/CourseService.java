@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 
 import org.otp.entity.Course;
 import org.otp.entity.CourseJoinRequest;
+import org.otp.entity.CourseStudents;
 import org.otp.entity.Users;
 import org.otp.repository.CourseAnnouncementReository;
 import org.otp.repository.CourseJoinRequestRepository;
@@ -63,6 +64,15 @@ public class CourseService {
 		courseJoinRequest.setRequestDate(new Date());
 		courseJoinRequestRepository.save(courseJoinRequest);
 
+	}
+	public void saveCourseStudent(int id, String name) {
+		Users user = userRepository.findByUsername(name);
+		Course course = courseRepository.findOne(id);
+		CourseStudents courseStudent=new CourseStudents();
+		courseStudent.setCourse(course);
+		courseStudent.setUser(user);
+		courseStudent.setJoinDate(new Date());
+		courseStudentsRepository.save(courseStudent);		
 	}
 
 	public CourseJoinRequest findByUserFromRequest(String name, int id) {

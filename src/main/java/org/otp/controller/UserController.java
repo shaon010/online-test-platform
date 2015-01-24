@@ -22,11 +22,11 @@ public class UserController {
 	private UserService userService;
 	
 	
-	@RequestMapping("/account")
+	@RequestMapping("/teacherDashboard")
 	public String account(Model model, Principal principal) {
 		/*String name = principal.getName();
 		model.addAttribute("user", userService.findOneWithPosts(name));*/
-		return "account";
+		return "teacherDashboard";
 	}
 	
 	

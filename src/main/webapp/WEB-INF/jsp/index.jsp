@@ -29,7 +29,7 @@
 				<p>Starting from ${course.startDate} </p>
 			  </div>	
 			  <div class="col-xs-3">			   	
-			     <a href="About.html" class="btn btn-success pull-right">Learn More</a><br><br>
+			     <a href="aboutcourse/${course.id}.html" class="btn btn-success pull-right">Learn More</a><br><br>
 			     <security:authorize>
 			     <a href='<spring:url value="/joinrequest/${course.id}.html"></spring:url>' class="btn btn-primary pull-right">Join</a>
                  </security:authorize>

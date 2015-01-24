@@ -59,6 +59,9 @@ public class Course {
 	private List<CourseStudents> courseStudentList;
 	
 	@OneToMany(mappedBy = "course", cascade = CascadeType.REMOVE)
+	private List<Quiz> quizList;
+	
+	@OneToMany(mappedBy = "course", cascade = CascadeType.REMOVE)
 	private List<CourseJoinRequest> courseReqStudentList;
 	
 	@OneToMany(mappedBy = "course", cascade = CascadeType.REMOVE)

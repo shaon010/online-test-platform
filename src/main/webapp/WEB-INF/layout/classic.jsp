@@ -87,7 +87,7 @@
               	<li class="${current == 'createcourse' ? 'active' : ''}"><a href="<spring:url value="/createcourse.html" />">Create Course</a></li>
               </security:authorize>
               <security:authorize access="isAuthenticated()">
-              	<li class="${current == 'account' ? 'active' : ''}"><a href="<spring:url value="/account.html" />">My account</a></li>
+              	<li class="${current == 'teacherDashboard' ? 'active' : ''}"><a href="<spring:url value="/teacherDashboard.html" />">Dashboard(t)</a></li>
               	<li><a href="<spring:url value="/logout" />">Logout</a></li>
               </security:authorize>
             </ul>

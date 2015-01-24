@@ -1,6 +1,8 @@
 package org.otp.entity;
 
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,7 +28,7 @@ public class CourseStudents {
 	
 	
 	@Column(name = "join_date",columnDefinition="DATE")
-	private String joinDate;
+	private Date joinDate;
 
 	public Integer getId() {
 		return id;
@@ -52,13 +54,14 @@ public class CourseStudents {
 		this.user = user;
 	}
 
-	public String getJoinDate() {
+	public Date getJoinDate() {
 		return joinDate;
 	}
 
-	public void setJoinDate(String joinDate) {
+	public void setJoinDate(Date joinDate) {
 		this.joinDate = joinDate;
 	}
+
 	
 	
 
