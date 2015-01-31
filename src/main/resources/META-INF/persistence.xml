@@ -11,5 +11,8 @@
 		<class>org.otp.entity.CourseAnnouncement</class>
 		<class>org.otp.entity.CourseJoinRequest</class>
 		<class>org.otp.entity.CourseStudents</class>
+		<class>org.otp.entity.SubmittedAnsMcq</class>
+		<class>org.otp.entity.SubmittedAnsTF</class>
+		<class>org.otp.entity.SubmittedAnsShortQue</class>
 	</persistence-unit>
 </persistence>

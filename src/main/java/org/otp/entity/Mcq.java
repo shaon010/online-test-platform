@@ -22,12 +22,52 @@ public class Mcq {
 	private String choice4;
 	private String choice5;
 	private String imagepath;
-	private String checkbox1;
-	private String checkbox2;
-	private String checkbox3;
-	private String checkbox4;
-	private String checkbox5;
+	private int checkbox1;
+	private int checkbox2;
+	private int checkbox3;
+	private int checkbox4;
+	private int checkbox5;
 	
+	public int getCheckbox1() {
+		return checkbox1;
+	}
+
+	public void setCheckbox1(int checkbox1) {
+		this.checkbox1 = checkbox1;
+	}
+
+	public int getCheckbox2() {
+		return checkbox2;
+	}
+
+	public void setCheckbox2(int checkbox2) {
+		this.checkbox2 = checkbox2;
+	}
+
+	public int getCheckbox3() {
+		return checkbox3;
+	}
+
+	public void setCheckbox3(int checkbox3) {
+		this.checkbox3 = checkbox3;
+	}
+
+	public int getCheckbox4() {
+		return checkbox4;
+	}
+
+	public void setCheckbox4(int checkbox4) {
+		this.checkbox4 = checkbox4;
+	}
+
+	public int getCheckbox5() {
+		return checkbox5;
+	}
+
+	public void setCheckbox5(int checkbox5) {
+		this.checkbox5 = checkbox5;
+	}
+
 	@ManyToOne
 	@JoinColumn(name = "quiz_id")
 	private Quiz quiz;
@@ -55,49 +95,6 @@ public class Mcq {
 	public void setImagepath(String imagepath) {
 		this.imagepath = imagepath;
 	}
-
-	public String getCheckbox1() {
-		return checkbox1;
-	}
-
-	public void setCheckbox1(String checkbox1) {
-		this.checkbox1 = checkbox1;
-	}
-
-	public String getCheckbox2() {
-		return checkbox2;
-	}
-
-	public void setCheckbox2(String checkbox2) {
-		this.checkbox2 = checkbox2;
-	}
-
-	public String getCheckbox3() {
-		return checkbox3;
-	}
-
-	public void setCheckbox3(String checkbox3) {
-		this.checkbox3 = checkbox3;
-	}
-
-	public String getCheckbox4() {
-		return checkbox4;
-	}
-
-	public void setCheckbox4(String checkbox4) {
-		this.checkbox4 = checkbox4;
-	}
-
-	public String getCheckbox5() {
-		return checkbox5;
-	}
-
-	public void setCheckbox5(String checkbox5) {
-		this.checkbox5 = checkbox5;
-	}
-
-
-
 	public String getChoice1() {
 		return choice1;
 	}

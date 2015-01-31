@@ -62,5 +62,15 @@
 		<put-attribute name="body" value="/WEB-INF/jsp/about-course.jsp" />
 		<put-attribute name="current" value="createcourse" />
 	</definition>
+	<definition name="studentCoursePage" extends="common">
+		<put-attribute name="title" value="Course Page" />
+		<put-attribute name="body" value="/WEB-INF/jsp/s-course-page.jsp" />
+		<put-attribute name="current" value="studentCoursePage" />
+	</definition>
+	<definition name="exampaper" extends="common">
+		<put-attribute name="title" value="Exam Paper" />
+		<put-attribute name="body" value="/WEB-INF/jsp/examPaper.jsp" />
+		<put-attribute name="current" value="exampaper" />
+	</definition>
 
 </tiles-definitions>

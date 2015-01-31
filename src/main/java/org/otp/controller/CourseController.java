@@ -38,7 +38,7 @@ public class CourseController {
 	public Course construcCourse() {
 		return new Course();
 	}
-	
+
 	@ModelAttribute("mcq")
 	public Mcq constructMcq() {
 		return new Mcq();
@@ -66,6 +66,16 @@ public class CourseController {
 	@RequestMapping("/createcourse")
 	public String createCourseInit(Model model, Principal principal) {
 		return "createcourse";
+	}
+	@RequestMapping("/studentCoursePage")
+	public String studentCoursePageInit(Model model, Principal principal) {
+		model.addAttribute("quizes", quizService.findAllQuizes());
+		return "studentCoursePage";
+	}
+	@RequestMapping("/quiz/attend/{id}")
+	public String attendQuizInit(Model model, Principal principal,@PathVariable int id) {
+		model.addAttribute("quiz", quizService.findById(id));
+		return "exampaper";
 	}
 	
 	@RequestMapping("/aboutcourse/{id}")

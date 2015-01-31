@@ -13,11 +13,10 @@
 				<hr>
 				<div class="panel-body">
 
-					<form:form commandName="user"
-						cssClass="form-horizontal registrationForm">
+					<form:form commandName="user" cssClass="form-horizontal registrationForm">
 						<c:if test="${param.success eq true}">
-		<div class="alert alert-success">Registration successful!</div>
-	</c:if>
+							<div class="alert alert-success">Registration successful!</div>
+						</c:if>
 											
 						 <div class="form-group">
 							<label for="roles" class="col-sm-4 control-label">Sign up as</label>
@@ -26,7 +25,7 @@
 									<option>-- select --</option>
 									<option value="1">Student</option>
 									<option value="2">Teacher</option>
-                     </select>
+                     			</select>
                      
 							</div>
 						</div>  

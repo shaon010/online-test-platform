@@ -86,6 +86,9 @@
               <security:authorize access="hasRole('ROLE_TEACHER')">
               	<li class="${current == 'createcourse' ? 'active' : ''}"><a href="<spring:url value="/createcourse.html" />">Create Course</a></li>
               </security:authorize>
+              <security:authorize access="hasRole('ROLE_STUDENT')">
+              	<li class="${current == 'studentCoursePage' ? 'active' : ''}"><a href="<spring:url value="/studentCoursePage.html" />">Course Page</a></li>
+              </security:authorize>
               <security:authorize access="isAuthenticated()">
               	<li class="${current == 'teacherDashboard' ? 'active' : ''}"><a href="<spring:url value="/teacherDashboard.html" />">Dashboard(t)</a></li>
               	<li><a href="<spring:url value="/logout" />">Logout</a></li>

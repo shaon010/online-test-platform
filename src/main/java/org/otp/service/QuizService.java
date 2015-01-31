@@ -1,5 +1,7 @@
 package org.otp.service;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.otp.entity.Mcq;
@@ -52,10 +54,22 @@ public class QuizService {
 		tfRepository.save(tf);
 		
 	}
-	
-	
-	
-	
+
+	public List<Quiz> findAllQuizes() {
+		return quizRepository.findAll();
+	}
+
+	public Quiz findById(int id) {
+		Quiz quiz=quizRepository.findOne(id);
+		List<Mcq> mcqList=mcqRepository.findAllByQuiz(quiz);
+		List<TF> tfList=tfRepository.findAllByQuiz(quiz);
+		List<ShortQue> sqList=sqRepository.findAllByQuiz(quiz);
+		quiz.setMcqList(mcqList);
+		quiz.setSqList(sqList);
+		quiz.setTfList(tfList);
+		return quiz;
+	}
+
 	
 /*
 	public List<Users> findAll() {

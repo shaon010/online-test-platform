@@ -113,8 +113,7 @@
                        </form:form>
                      </div><!--time-point-->          
                 <hr>
-                
-                
+              
                     <div class="row">
 							<div class="col-lg-5">
 								<h3>Multiple choose</h3>
