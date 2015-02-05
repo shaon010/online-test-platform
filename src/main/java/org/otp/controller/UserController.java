@@ -23,10 +23,16 @@ public class UserController {
 	
 	
 	@RequestMapping("/teacherDashboard")
-	public String account(Model model, Principal principal) {
+	public String teacherDashboard(Model model, Principal principal) {
 		/*String name = principal.getName();
 		model.addAttribute("user", userService.findOneWithPosts(name));*/
 		return "teacherDashboard";
+	}
+    @RequestMapping("/studentDashboard")
+	public String studentDashboard(Model model, Principal principal) {
+		/*String name = principal.getName();
+		model.addAttribute("user", userService.findOneWithPosts(name));*/
+		return "studentDashboard";
 	}
 	
 	

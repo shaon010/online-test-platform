@@ -39,7 +39,7 @@
            <textarea class="form-control" rows="3"> </textarea>
            <div class="form-group">
              <label for="exampleInputFile">File input</label>
-             <input type="file" id="exampleInputFile">                          
+             <input type="file" id="exampleInputFile1">
            </div>
            <a href="#" class="btn btn-default">Upload</a>
           </div>

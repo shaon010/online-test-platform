@@ -81,16 +81,15 @@
               	<li class="${current == 'users' ? 'active' : ''}"><a href="<spring:url value="/users.html" />">Users</a></li>
               </security:authorize>
               <security:authorize access="hasRole('ROLE_TEACHER')">
-              	<li class="${current == 'createquiz' ? 'active' : ''}"><a href="<spring:url value="/createquiz.html" />">Create Quiz</a></li>
-              </security:authorize>
-              <security:authorize access="hasRole('ROLE_TEACHER')">
               	<li class="${current == 'createcourse' ? 'active' : ''}"><a href="<spring:url value="/createcourse.html" />">Create Course</a></li>
+                  <li class="${current == 'createquiz' ? 'active' : ''}"><a href="<spring:url value="/createquiz.html" />">Create Quiz</a></li>
+                  <li class="${current == 'teacherDashboard' ? 'active' : ''}"><a href="<spring:url value="/teacherDashboard.html" />">Teacher Dashboard </a></li>
               </security:authorize>
               <security:authorize access="hasRole('ROLE_STUDENT')">
               	<li class="${current == 'studentCoursePage' ? 'active' : ''}"><a href="<spring:url value="/studentCoursePage.html" />">Course Page</a></li>
+                  <li class="${current == 'studentDashboard' ? 'active' : ''}"><a href="<spring:url value="/studentDashboard.html" />">Student Dashboard</a></li>
               </security:authorize>
               <security:authorize access="isAuthenticated()">
-              	<li class="${current == 'teacherDashboard' ? 'active' : ''}"><a href="<spring:url value="/teacherDashboard.html" />">Dashboard(t)</a></li>
               	<li><a href="<spring:url value="/logout" />">Logout</a></li>
               </security:authorize>
             </ul>

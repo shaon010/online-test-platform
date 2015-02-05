@@ -35,7 +35,7 @@ public class CourseController {
 	CourseService courseService;
 	
 	@ModelAttribute("course")
-	public Course construcCourse() {
+	public Course constructCourse() {
 		return new Course();
 	}
 
@@ -77,7 +77,32 @@ public class CourseController {
 		model.addAttribute("quiz", quizService.findById(id));
 		return "exampaper";
 	}
+    
+    
+    @RequestMapping("/saveQuizAns")
+	public String saveQuiz(Model model, Principal principal, 
+                           @RequestParam(value="checkbox1[]",defaultValue ="-1") int[] checkbox1,
+                           @RequestParam(value="checkbox2[]",defaultValue ="-1") int[] checkbox2,
+                           @RequestParam(value="checkbox3[]",defaultValue ="-1") int[] checkbox3,
+                           @RequestParam(value="checkbox4[]",defaultValue ="-1") int[] checkbox4,
+                           @RequestParam(value="checkbox5[]",defaultValue ="-1") int[] checkbox5,
+                           @RequestParam(value="tfOption[]",defaultValue ="-1") String[] tfOption,
+                           @RequestParam(value="sqAns[]",defaultValue ="-1") String[] sqAns,
+                           @RequestParam(value="mcq[]",defaultValue ="-1") int[] mcq,
+                           @RequestParam(value="sq[]",defaultValue ="-1") int[] sq,
+                           @RequestParam(value="tf[]",defaultValue ="-1") int[] tf
+                           ) {
+        System.out.println("shaon");
+		System.out.println(checkbox1[0]);
+		System.out.println(sq[0]);
+		System.out.println(tfOption[0]);
+		System.out.println(sqAns[0]);
+		//model.addAttribute("quiz", quizService.findById(id));
+        
+        return  "redirect:/index.html";
+	}
 	
+    
 	@RequestMapping("/aboutcourse/{id}")
 	public String aboutCourseShow(Model model,Principal principal,@PathVariable int id) {
 		String name=null;
@@ -172,9 +197,6 @@ public class CourseController {
 		  model.addAttribute("sq", session.getAttribute("sq"));
 		  model.addAttribute("tf", session.getAttribute("tf"));
 
-
-
-		 
 		return "preview";
 	}
 	
@@ -192,7 +214,7 @@ public class CourseController {
  * MCQ AJAX CALL
  * 
  * */
-	
+
 	 @SuppressWarnings("unchecked")
 	@RequestMapping( value="/savemcq" ,method = RequestMethod.POST)
 	 public @ResponseBody

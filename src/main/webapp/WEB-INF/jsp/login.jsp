@@ -52,14 +52,11 @@
 									placeholder="Password" required>
 							</div>
 						</div>
-						<!-- <div class="checkbox">
-							<label> <input type="checkbox"> Remember me | <a
-								href="#">Forget your password?</a>
-							</label>
-						</div> -->
-						<div class="checkbox">
+
+                        
+						<div class="checkbox" >
 							<input type="checkbox"
-								name='_spring_security_remember_me' checked="checked">
+								name='_spring_security_remember_me' checked="checked" style="float: none;">
 								Remember me | <a href="#">Forget your password?</a>
 							
 						</div>

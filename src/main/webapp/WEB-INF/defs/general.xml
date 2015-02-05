@@ -30,6 +30,11 @@
 		<put-attribute name="body" value="/WEB-INF/jsp/teacher-dashboard.jsp" />
 		<put-attribute name="current" value="teacherDashboard" />
 	</definition>
+    <definition name="studentDashboard" extends="common">
+		<put-attribute name="title" value="Student Dashboard" />
+		<put-attribute name="body" value="/WEB-INF/jsp/student-dashboard.jsp" />
+		<put-attribute name="current" value="studentDashboard" />
+	</definition>
 
 	<definition name="user-register" extends="common">
 		<put-attribute name="title" value="User registration" />

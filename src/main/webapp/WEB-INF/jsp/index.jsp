@@ -17,6 +17,7 @@
 </div><!--end-row-->
 
 <h3>Courses</h3><hr>
+      <c:if test="${course!=null }">
 <c:forEach  items="${course }" var="course">
 <div class="col-xs-12">
 		
@@ -39,7 +40,7 @@
 
 	</div>
 </c:forEach>
-	
+      </c:if>
 </div><!--end-panel-body-->
 </div><!--end-panel-->
 </div>
