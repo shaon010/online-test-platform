@@ -39,16 +39,13 @@
 												id="inlineCheckbox1" name="checkbox2[]" value=2>${mcq.choice2}
 											</label>
                                             <label class="checkbox "> <input type="checkbox"
-												id="inlineCheckbox1" name="checkbox3[]" value=3>${mcq.choice3}
+												id="inlineCheckbox1" name="checkbox3[]" value=3 >${mcq.choice3}
 											</label>
                                             <label class="checkbox "> <input type="checkbox"
 												id="inlineCheckbox1" name="checkbox4[]" value=4>${mcq.choice4}
 											</label>
                                             <label class="checkbox"> <input type="checkbox"
 												id="inlineCheckbox1" name="checkbox5[]" value=5>${mcq.choice5}
-											</label>
-                                            <label class="checkbox"> <input type="checkbox"
-												id="inlineCheckbox1" name="checkbox6[]" value=6>${mcq.choice5}
 											</label>
                                             <input type="hidden" value="${mcq.id}" name="mcq[]">
 										</div>

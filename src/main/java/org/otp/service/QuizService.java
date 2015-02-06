@@ -4,16 +4,8 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
-import org.otp.entity.Mcq;
-import org.otp.entity.Quiz;
-import org.otp.entity.ShortQue;
-import org.otp.entity.TF;
-import org.otp.repository.McqRepository;
-import org.otp.repository.QuizRepository;
-import org.otp.repository.RoleRepository;
-import org.otp.repository.ShortQueRepository;
-import org.otp.repository.TFRepository;
-import org.otp.repository.UserRepository;
+import org.otp.entity.*;
+import org.otp.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +26,12 @@ public class QuizService {
 	private TFRepository tfRepository;
 	@Autowired
 	private ShortQueRepository sqRepository;
+    @Autowired
+    private SubmittedAnsMcqRepository submittedAnsMcqRepository;
+    @Autowired
+    private SubmittedAnsShortQueRepository submittedAnsShortQueRepository;
+    @Autowired
+    private SubmittedAnsTFRepository submittedAnsTFRepository;
 
 	public void save(Quiz quiz) {
 		quizRepository.save(quiz);
@@ -69,6 +67,55 @@ public class QuizService {
 		quiz.setTfList(tfList);
 		return quiz;
 	}
+
+    public void saveQuizAns(int[] mcqId, int[] sqId, int[] tfId, int[] checkbox1,
+                            int[] checkbox2, int[] checkbox3, int[] checkbox4, int[] checkbox5,
+                            String[] tfOption, String[] sqAns,String user) {
+        Users users=userRepository.findByUsername(user);
+        for(int i=0;i<mcqId.length;i++){
+           Mcq mcq= mcqRepository.findOne(mcqId[i]);
+            SubmittedAnsMcq submittedAnsMcq=new SubmittedAnsMcq();
+            if(checkbox1[0]!=-1 && checkbox1.length>i){
+                submittedAnsMcq.setCheckbox1(checkbox1[i]);
+            }
+            if(checkbox2[0]!=-1&& checkbox2.length>i){
+                submittedAnsMcq.setCheckbox2(checkbox2[i]);
+            }
+            if(checkbox3[0]!=-1&& checkbox3.length>i){
+                submittedAnsMcq.setCheckbox3(checkbox3[i]);
+            }
+            if(checkbox4[0]!=-1&& checkbox4.length>i){
+                submittedAnsMcq.setCheckbox4(checkbox4[i]);
+            }
+            if(checkbox5[0]!=-1&& checkbox5.length>i){
+                submittedAnsMcq.setCheckbox5(checkbox5[i]);
+            }
+            submittedAnsMcq.setMcq(mcq);
+            submittedAnsMcq.setUser(users);
+            submittedAnsMcqRepository.save(submittedAnsMcq);
+        }
+        for(int i=0;i<sqId.length;i++){
+            ShortQue shortQue=sqRepository.findOne(sqId[i]);
+            SubmittedAnsShortQue submittedAnsShortQue=new SubmittedAnsShortQue();
+            submittedAnsShortQue.setAnswer(sqAns[i]);
+            submittedAnsShortQue.setSq(shortQue);
+            submittedAnsShortQue.setUser(users);
+            submittedAnsShortQueRepository.save(submittedAnsShortQue);
+        }
+        for(int i=0;i<tfId.length;i++){
+           TF tf=tfRepository.findOne(tfId[i]);
+            SubmittedAnsTF submittedAnsTF=new SubmittedAnsTF();
+            submittedAnsTF.setTfOption(tfOption[i]);
+            submittedAnsTF.setTf(tf);
+            submittedAnsTF.setUser(users);
+            submittedAnsTFRepository.save(submittedAnsTF);
+
+        }
+
+            
+        }
+        
+    }
 
 	
 /*
@@ -107,4 +154,4 @@ public class QuizService {
 		return userRepository.findAll();
 	}*/
 
-}
+

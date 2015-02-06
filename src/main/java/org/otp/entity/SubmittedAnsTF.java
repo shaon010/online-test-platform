@@ -23,7 +23,23 @@ public class SubmittedAnsTF {
 	@JoinColumn(name = "student_id")
 	private Users user;
 
-	public String getTfOption() {
+    public TF getTf() {
+        return tf;
+    }
+
+    public void setTf(TF tf) {
+        this.tf = tf;
+    }
+
+    public Users getUser() {
+        return user;
+    }
+
+    public void setUser(Users user) {
+        this.user = user;
+    }
+
+    public String getTfOption() {
 		return tfOption;
 	}
 

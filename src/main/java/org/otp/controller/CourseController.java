@@ -4,6 +4,7 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -15,6 +16,7 @@ import org.otp.entity.TF;
 import org.otp.service.CourseService;
 import org.otp.service.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -80,7 +82,7 @@ public class CourseController {
     
     
     @RequestMapping("/saveQuizAns")
-	public String saveQuiz(Model model, Principal principal, 
+	public String saveQuiz(Model model, Principal principal,
                            @RequestParam(value="checkbox1[]",defaultValue ="-1") int[] checkbox1,
                            @RequestParam(value="checkbox2[]",defaultValue ="-1") int[] checkbox2,
                            @RequestParam(value="checkbox3[]",defaultValue ="-1") int[] checkbox3,
@@ -92,11 +94,17 @@ public class CourseController {
                            @RequestParam(value="sq[]",defaultValue ="-1") int[] sq,
                            @RequestParam(value="tf[]",defaultValue ="-1") int[] tf
                            ) {
+        String user = principal.getName();
+        quizService.saveQuizAns(mcq, sq, tf, checkbox1, checkbox2, checkbox3, checkbox4, checkbox5, tfOption, sqAns,user);
         System.out.println("shaon");
 		System.out.println(checkbox1[0]);
 		System.out.println(sq[0]);
 		System.out.println(tfOption[0]);
 		System.out.println(sqAns[0]);
+        if(mcq!=null){
+            System.out.println("mcq is null");
+        }
+
 		//model.addAttribute("quiz", quizService.findById(id));
         
         return  "redirect:/index.html";
