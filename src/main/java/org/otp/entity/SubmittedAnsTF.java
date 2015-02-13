@@ -14,6 +14,7 @@ public class SubmittedAnsTF {
 	@GeneratedValue
 	private Integer id;
 	private String tfOption;
+    private boolean ansState=false; //1=true,0=false
 
 	@ManyToOne
 	@JoinColumn(name = "tf_id")
@@ -22,6 +23,14 @@ public class SubmittedAnsTF {
 	@ManyToOne
 	@JoinColumn(name = "student_id")
 	private Users user;
+
+    public boolean isAnsState() {
+        return ansState;
+    }
+
+    public void setAnsState(boolean ansState) {
+        this.ansState = ansState;
+    }
 
     public TF getTf() {
         return tf;

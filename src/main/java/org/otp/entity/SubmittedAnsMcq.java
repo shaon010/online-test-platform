@@ -19,16 +19,24 @@ public class SubmittedAnsMcq {
 	private int checkbox3;
 	private int checkbox4;
 	private int checkbox5;
+    private boolean ansState=false; // 1= true, 0 = false
 
-	@ManyToOne
+
+    @ManyToOne
 	@JoinColumn(name = "mcq_id")
 	private Mcq mcq;
 	
 	@ManyToOne
 	@JoinColumn(name = "student_id")
 	private Users user;
-	
-	
+
+
+    public boolean isAnsState() {
+        return ansState;
+    }
+    public void setAnsState(boolean ansState) {
+        this.ansState = ansState;
+    }
 	public Mcq getMcq() {
 		return mcq;
 	}

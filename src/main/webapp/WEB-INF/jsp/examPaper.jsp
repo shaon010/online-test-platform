@@ -10,7 +10,8 @@
 				<div class="panel panel-defult " style="border-color: black;">
 					<c:if test="${quiz!=null}">
 					<div class="body">
-                        <form action="/saveQuizAns.html" method="post">
+
+                        <form action="/saveQuizAns.html" method="post" id="examPaper">
 						<div class="Text-center">
 							<center>
 								<h2>Title: ${quiz.title}</h2>
@@ -55,24 +56,28 @@
 								<c:if test="${quiz.tfList!=null}">
 									<br>
 									<br>
+                                    <div>
 									<h3>True False</h3>
-									<c:forEach items="${quiz.tfList}" var="tf">
+									<c:forEach items="${quiz.tfList}" var="tf" >
+                                        <div>
 										<h4>${tf.question}
 										</h4>
 										<p class="help-block">The first letter may be R</p>
 										<br>
-										<div class="radio-inline">
-											<label> <input type="radio" name="tfOption[]"> True
+                                            <input type="hidden" value="${tf.id}" name="tf[]">
+                                            <div class="radio-inline">
+											<label> <input type="radio" name="tfOption[]${tf.id}" value="true" checked> True
 											</label>
 										</div>
 										<div class="radio-inline">
-											<label> <input type="radio" name="tfOption[]"
-												id="optionsRadios2"> False
+											<label> <input type="radio" name="tfOption[]${tf.id}"
+												id="optionsRadios2" value="false"> False
 											</label>
 										</div>
 										<br>
-                                        <input type="hidden" value="${tf.id}" name="tf[]">
+                                        </div>
 									</c:forEach>
+                                    </div>
 								</c:if>
 
 								<c:if test="${quiz.sqList!=null}">
@@ -93,7 +98,7 @@
 						</div>
 						<!--end row-->
                             <div class="text-center">
-                                <input type="submit" class="btn btn-success">
+                                <input type="submit" class="btn btn-success" onclick="postExamPaper()">
                             </div>
                         </form>
 						<br> <br>
@@ -111,3 +116,26 @@
 	<!--end container-->
 
 </body>
+
+<script type="text/javascript">
+
+    $('#examPaper').submit(function () {
+
+        $.ajax({
+            url: $(this).attr('action'),
+            type: 'POST',
+            data: JSON.stringify($(this).serializeArray()),
+            contentType: 'application/json',
+            success: function () {
+                alert('Successfully submitted!!');
+                location.href = "/studentCoursePage.html"
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert('An error has occured!! :-(')
+            }
+        });
+
+        return false
+    });
+
+</script>

@@ -22,13 +22,13 @@ public class Quiz {
 	private Integer id;
 
 	private String title;
-	
+
 	@Column(name = "start_date",columnDefinition="DATE")
 	private String startDate;
 	
 	@Column(name = "end_date", columnDefinition="DATE")
 	private String endDate;
-	
+
 	private int duration;
 	private double point;
 	
@@ -45,7 +45,15 @@ public class Quiz {
 	@OneToMany(mappedBy = "quiz", cascade = CascadeType.REMOVE)
 	private List<TF> tfList;
 
-	public String getStartDate() {
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
+    }
+
+    public String getStartDate() {
 		return startDate;
 	}
 

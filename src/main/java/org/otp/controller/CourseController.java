@@ -2,17 +2,17 @@ package org.otp.controller;
 
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import org.otp.entity.Course;
-import org.otp.entity.Mcq;
-import org.otp.entity.Quiz;
-import org.otp.entity.ShortQue;
-import org.otp.entity.TF;
+import org.otp.entity.*;
+import org.otp.repository.McqRepository;
 import org.otp.service.CourseService;
 import org.otp.service.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +20,7 @@ import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 
@@ -81,33 +76,12 @@ public class CourseController {
 	}
     
     
-    @RequestMapping("/saveQuizAns")
-	public String saveQuiz(Model model, Principal principal,
-                           @RequestParam(value="checkbox1[]",defaultValue ="-1") int[] checkbox1,
-                           @RequestParam(value="checkbox2[]",defaultValue ="-1") int[] checkbox2,
-                           @RequestParam(value="checkbox3[]",defaultValue ="-1") int[] checkbox3,
-                           @RequestParam(value="checkbox4[]",defaultValue ="-1") int[] checkbox4,
-                           @RequestParam(value="checkbox5[]",defaultValue ="-1") int[] checkbox5,
-                           @RequestParam(value="tfOption[]",defaultValue ="-1") String[] tfOption,
-                           @RequestParam(value="sqAns[]",defaultValue ="-1") String[] sqAns,
-                           @RequestParam(value="mcq[]",defaultValue ="-1") int[] mcq,
-                           @RequestParam(value="sq[]",defaultValue ="-1") int[] sq,
-                           @RequestParam(value="tf[]",defaultValue ="-1") int[] tf
-                           ) {
-        String user = principal.getName();
-        quizService.saveQuizAns(mcq, sq, tf, checkbox1, checkbox2, checkbox3, checkbox4, checkbox5, tfOption, sqAns,user);
-        System.out.println("shaon");
-		System.out.println(checkbox1[0]);
-		System.out.println(sq[0]);
-		System.out.println(tfOption[0]);
-		System.out.println(sqAns[0]);
-        if(mcq!=null){
-            System.out.println("mcq is null");
-        }
-
-		//model.addAttribute("quiz", quizService.findById(id));
-        
-        return  "redirect:/index.html";
+    @RequestMapping(headers = "Content-Type=application/json",  method = RequestMethod.POST, value = "/saveQuizAns")
+    @ResponseBody
+    public String saveQuiz(@RequestBody List<Map<String, String>> submittedQuiz) throws Exception {
+        quizService.saveQuizAns(submittedQuiz);
+        System.out.println(submittedQuiz);
+        return  "success";
 	}
 	
     

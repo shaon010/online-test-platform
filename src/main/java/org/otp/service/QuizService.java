@@ -1,6 +1,7 @@
 package org.otp.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.transaction.Transactional;
 
@@ -32,6 +33,7 @@ public class QuizService {
     private SubmittedAnsShortQueRepository submittedAnsShortQueRepository;
     @Autowired
     private SubmittedAnsTFRepository submittedAnsTFRepository;
+    int tfCheckingId=0;
 
 	public void save(Quiz quiz) {
 		quizRepository.save(quiz);
@@ -68,53 +70,73 @@ public class QuizService {
 		return quiz;
 	}
 
-    public void saveQuizAns(int[] mcqId, int[] sqId, int[] tfId, int[] checkbox1,
-                            int[] checkbox2, int[] checkbox3, int[] checkbox4, int[] checkbox5,
-                            String[] tfOption, String[] sqAns,String user) {
-        Users users=userRepository.findByUsername(user);
-        for(int i=0;i<mcqId.length;i++){
-           Mcq mcq= mcqRepository.findOne(mcqId[i]);
-            SubmittedAnsMcq submittedAnsMcq=new SubmittedAnsMcq();
-            if(checkbox1[0]!=-1 && checkbox1.length>i){
-                submittedAnsMcq.setCheckbox1(checkbox1[i]);
-            }
-            if(checkbox2[0]!=-1&& checkbox2.length>i){
-                submittedAnsMcq.setCheckbox2(checkbox2[i]);
-            }
-            if(checkbox3[0]!=-1&& checkbox3.length>i){
-                submittedAnsMcq.setCheckbox3(checkbox3[i]);
-            }
-            if(checkbox4[0]!=-1&& checkbox4.length>i){
-                submittedAnsMcq.setCheckbox4(checkbox4[i]);
-            }
-            if(checkbox5[0]!=-1&& checkbox5.length>i){
-                submittedAnsMcq.setCheckbox5(checkbox5[i]);
-            }
-            submittedAnsMcq.setMcq(mcq);
-            submittedAnsMcq.setUser(users);
-            submittedAnsMcqRepository.save(submittedAnsMcq);
-        }
-        for(int i=0;i<sqId.length;i++){
-            ShortQue shortQue=sqRepository.findOne(sqId[i]);
-            SubmittedAnsShortQue submittedAnsShortQue=new SubmittedAnsShortQue();
-            submittedAnsShortQue.setAnswer(sqAns[i]);
-            submittedAnsShortQue.setSq(shortQue);
-            submittedAnsShortQue.setUser(users);
-            submittedAnsShortQueRepository.save(submittedAnsShortQue);
-        }
-        for(int i=0;i<tfId.length;i++){
-           TF tf=tfRepository.findOne(tfId[i]);
-            SubmittedAnsTF submittedAnsTF=new SubmittedAnsTF();
-            submittedAnsTF.setTfOption(tfOption[i]);
-            submittedAnsTF.setTf(tf);
-            submittedAnsTF.setUser(users);
-            submittedAnsTFRepository.save(submittedAnsTF);
+    public void saveQuizAns(List<Map<String, String>> submittedQuiz) {
+        SubmittedAnsMcq submittedAnsMcq=new SubmittedAnsMcq();
+        SubmittedAnsShortQue submittedAnsShortQue =new SubmittedAnsShortQue();
+        SubmittedAnsTF submittedAnsTF = new SubmittedAnsTF();
+        Mcq mcq= new Mcq();
+        TF tf = new TF();
+        ShortQue shortQue=new ShortQue();
 
-        }
 
-            
+        for (Map<String, String> formInput : submittedQuiz) {
+            if(formInput.get("name").equals("checkbox1[]")){
+                int ans=Integer.parseInt(formInput.get("value"));
+                submittedAnsMcq.setCheckbox1(ans);
+            }
+            else if(formInput.get("name").equals("checkbox2[]")){
+                int ans=Integer.parseInt(formInput.get("value"));
+                submittedAnsMcq.setCheckbox2(ans);
+            }
+           else if(formInput.get("name").equals("checkbox3[]")){
+                int ans=Integer.parseInt(formInput.get("value"));
+                submittedAnsMcq.setCheckbox3(ans);
+            }
+           else if(formInput.get("name").equals("checkbox4[]")){
+                int ans=Integer.parseInt(formInput.get("value"));
+                submittedAnsMcq.setCheckbox4(ans);
+            }
+            else if(formInput.get("name").equals("checkbox5[]")){
+                int ans=Integer.parseInt(formInput.get("value"));
+                submittedAnsMcq.setCheckbox5(ans);
+            }
+            else if(formInput.get("name").equals("mcq[]")){
+                mcq= mcqRepository.findOne(Integer.parseInt(formInput.get("value")));
+                submittedAnsMcq.setMcq(mcq);
+                if(submittedAnsMcq.getCheckbox1()==mcq.getCheckbox1()&&submittedAnsMcq.getCheckbox2()==mcq.getCheckbox2()&&
+                        submittedAnsMcq.getCheckbox3()==mcq.getCheckbox3()&&submittedAnsMcq.getCheckbox4()==mcq.getCheckbox4()&&
+                        submittedAnsMcq.getCheckbox5()==mcq.getCheckbox5()){
+                    submittedAnsMcq.setAnsState(true);
+                }
+                submittedAnsMcqRepository.save(submittedAnsMcq);
+               submittedAnsMcq= new SubmittedAnsMcq();
+            }
+            else if(formInput.get("name").equals("tf[]")){
+                tfCheckingId=Integer.parseInt(formInput.get("value"));
+                tf=tfRepository.findOne(tfCheckingId);
+                submittedAnsTF.setTf(tf);
+            }
+            else if(formInput.get("name").equals("tfOption[]"+String.valueOf(tfCheckingId))){
+                String  ans=formInput.get("value");
+                submittedAnsTF.setTfOption(ans);
+                if(tf.getTfOption().equals(submittedAnsTF.getTfOption())){
+                    submittedAnsTF.setAnsState(true);
+                }
+                submittedAnsTFRepository.save(submittedAnsTF);
+                submittedAnsTF=new SubmittedAnsTF();
+            }
+            else if(formInput.get("name").equals("sqAns[]")){
+                String ans=formInput.get("value");
+                submittedAnsShortQue.setAnswer(ans);
+            }
+            else if(formInput.get("name").equals("sq[]")){
+                shortQue=sqRepository.findOne(Integer.parseInt(formInput.get("value")));
+                submittedAnsShortQue.setSq(shortQue);
+                submittedAnsShortQueRepository.save(submittedAnsShortQue);
+                submittedAnsShortQue=new SubmittedAnsShortQue();
+            }
         }
-        
+        }
     }
 
 	
