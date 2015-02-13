@@ -15,6 +15,7 @@ import org.otp.entity.*;
 import org.otp.repository.McqRepository;
 import org.otp.service.CourseService;
 import org.otp.service.QuizService;
+import org.otp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
@@ -30,6 +31,8 @@ public class CourseController {
 	QuizService quizService;
 	@Autowired
 	CourseService courseService;
+    @Autowired
+    UserService userService;
 	
 	@ModelAttribute("course")
 	public Course constructCourse() {
@@ -66,8 +69,11 @@ public class CourseController {
 	}
 	@RequestMapping("/studentCoursePage")
 	public String studentCoursePageInit(Model model, Principal principal) {
-		model.addAttribute("quizes", quizService.findAllQuizes());
-		return "studentCoursePage";
+        String userName=principal.getName();
+        Users user=userService.findOne(userName);
+        model.addAttribute("quizes", quizService.findAllQuizes());
+        model.addAttribute("results",quizService.findResultsByUser(user));
+        return "studentCoursePage";
 	}
 	@RequestMapping("/quiz/attend/{id}")
 	public String attendQuizInit(Model model, Principal principal,@PathVariable int id) {
@@ -78,8 +84,10 @@ public class CourseController {
     
     @RequestMapping(headers = "Content-Type=application/json",  method = RequestMethod.POST, value = "/saveQuizAns")
     @ResponseBody
-    public String saveQuiz(@RequestBody List<Map<String, String>> submittedQuiz) throws Exception {
-        quizService.saveQuizAns(submittedQuiz);
+    public String saveQuiz(@RequestBody List<Map<String, String>> submittedQuiz,Principal principal) throws Exception {
+        String userName=principal.getName();
+        Users user= userService.findOne(userName);
+        quizService.saveQuizAns(submittedQuiz,user);
         System.out.println(submittedQuiz);
         return  "success";
 	}
@@ -161,20 +169,6 @@ public class CourseController {
 	public String previewQues(Model model,HttpSession session) {
 		
 		  model.addAttribute("quiz", session.getAttribute("quiz"));
-		  
-	/*	  if(session.getAttribute("mcq")==null){
-				Mcq mcq=null;
-			  session.setAttribute("mcq", mcq);
-			}
-		  if(session.getAttribute("sq")==null){
-				ShortQue sq=null;
-			  session.setAttribute("sq", sq);
-		  }
-		  if(session.getAttribute("tf")==null){
-				TF tf=null;
-			  session.setAttribute("tf", tf);
-		  }
-*/
 		  model.addAttribute("mcq", session.getAttribute("mcq"));
 		  model.addAttribute("sq", session.getAttribute("sq"));
 		  model.addAttribute("tf", session.getAttribute("tf"));

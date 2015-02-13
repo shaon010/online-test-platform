@@ -23,7 +23,7 @@
 							</center>
 						</div>
 						<div class="row">
-                            
+                            <input type="hidden" name="quizId" value="${quiz.id}"/>
 							<div class="col-lg-8" style="padding-left: 30px;">
 								<c:if test="${quiz.mcqList!=null}">
 									<h3>MCQ</h3>
@@ -128,7 +128,7 @@
             contentType: 'application/json',
             success: function () {
                 alert('Successfully submitted!!');
-                location.href = "/studentCoursePage.html"
+                location.href = "/studentCoursePage.html?success=true"
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 alert('An error has occured!! :-(')

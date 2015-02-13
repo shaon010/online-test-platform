@@ -1,5 +1,6 @@
 package org.otp.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -33,26 +34,29 @@ public class QuizService {
     private SubmittedAnsShortQueRepository submittedAnsShortQueRepository;
     @Autowired
     private SubmittedAnsTFRepository submittedAnsTFRepository;
-    int tfCheckingId=0;
+    @Autowired
+    private ResultRepository resultRepository;
+
+
 
 	public void save(Quiz quiz) {
 		quizRepository.save(quiz);
-		
+
 	}
 
 	public void save(Mcq mcq) {
 		mcqRepository.save(mcq);
 
 	}
-	
+
 	public void save(ShortQue sq) {
 		sqRepository.save(sq);
-		
+
 	}
-	
+
 	public void save(TF tf) {
 		tfRepository.save(tf);
-		
+
 	}
 
 	public List<Quiz> findAllQuizes() {
@@ -70,17 +74,27 @@ public class QuizService {
 		return quiz;
 	}
 
-    public void saveQuizAns(List<Map<String, String>> submittedQuiz) {
+    public void saveQuizAns(List<Map<String, String>> submittedQuiz, Users user) {
         SubmittedAnsMcq submittedAnsMcq=new SubmittedAnsMcq();
         SubmittedAnsShortQue submittedAnsShortQue =new SubmittedAnsShortQue();
         SubmittedAnsTF submittedAnsTF = new SubmittedAnsTF();
+        Result result=new Result();
+        Quiz quiz=new Quiz();
         Mcq mcq= new Mcq();
         TF tf = new TF();
         ShortQue shortQue=new ShortQue();
-
+        double obtainedMarks=0;
+        int tfCheckingId=0;
 
         for (Map<String, String> formInput : submittedQuiz) {
-            if(formInput.get("name").equals("checkbox1[]")){
+            if(formInput.get("name").equals("quizId")){
+                int id=Integer.parseInt(formInput.get("value"));
+                quiz=quizRepository.findOne(id);
+                result.setQuiz(quiz);
+                result.setUser(user);
+
+            }
+           else if(formInput.get("name").equals("checkbox1[]")){
                 int ans=Integer.parseInt(formInput.get("value"));
                 submittedAnsMcq.setCheckbox1(ans);
             }
@@ -107,6 +121,8 @@ public class QuizService {
                         submittedAnsMcq.getCheckbox3()==mcq.getCheckbox3()&&submittedAnsMcq.getCheckbox4()==mcq.getCheckbox4()&&
                         submittedAnsMcq.getCheckbox5()==mcq.getCheckbox5()){
                     submittedAnsMcq.setAnsState(true);
+                    double quizPoint=result.getQuiz().getPoint();
+                    obtainedMarks+=quizPoint;
                 }
                 submittedAnsMcqRepository.save(submittedAnsMcq);
                submittedAnsMcq= new SubmittedAnsMcq();
@@ -121,6 +137,8 @@ public class QuizService {
                 submittedAnsTF.setTfOption(ans);
                 if(tf.getTfOption().equals(submittedAnsTF.getTfOption())){
                     submittedAnsTF.setAnsState(true);
+                    double quizPoint=result.getQuiz().getPoint();
+                    obtainedMarks+=quizPoint;
                 }
                 submittedAnsTFRepository.save(submittedAnsTF);
                 submittedAnsTF=new SubmittedAnsTF();
@@ -136,8 +154,14 @@ public class QuizService {
                 submittedAnsShortQue=new SubmittedAnsShortQue();
             }
         }
+        result.setObtainedMarks(obtainedMarks);
+        resultRepository.save(result);
         }
+
+    public List<Result> findResultsByUser(Users user) {
+        return resultRepository.findAllByUser(user);
     }
+}
 
 	
 /*
@@ -174,6 +198,7 @@ public class QuizService {
 
 	public List<Users> getUsers() {
 		return userRepository.findAll();
-	}*/
+	}
+	*/
 
 

@@ -35,10 +35,24 @@
           <c:forEach items="${quizes}" var="quiz">
           <tr>
             <!-- <td>1</td> -->
-            <td><a href="<spring:url value="/quiz/attend/${quiz.id}.html" />" class=" triggerRemove"" data-toggle="modal" data-target="#myModal">${quiz.title}</a></td>
-            <td>${quiz.startDate}</td>
+              <c:forEach items="${results}" var="result">
+                  <c:if test="${result.quiz.id==quiz.id}">
+                 <td class="triggerRemove" data-toggle="modal" data-target="#myModal">${quiz.title}</td>
+              </c:if>
+                  <c:if test="${result.quiz.id!=quiz.id}">
+                  <td><a href="<spring:url value="/quiz/attend/${quiz.id}.html" />" class="triggerRemove" data-toggle="modal" data-target="#myModal">${quiz.title}</a></td>
+              </c:if>
+
+              <td>${quiz.startDate}</td>
             <td>${quiz.endDate}</td>
-            <td>${quiz.point}</td>
+
+              <c:if test="${result.quiz.id==quiz.id}">
+                  <td >${result.obtainedMarks}</td>
+              </c:if>
+                  <c:if test="${result.quiz.id!=quiz.id}">
+                      <td >N/A</td>
+                  </c:if>
+              </c:forEach>
           </tr>
           </c:forEach>
           </c:if>  
@@ -80,6 +94,8 @@
          </div><!--end show-->        
         </div>
       </div> 
-     </div>      
-	</section>
+     </div>
+    </div>
+    </section>
+
 </div>  
