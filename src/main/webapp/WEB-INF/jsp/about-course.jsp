@@ -3,7 +3,6 @@
 
 <%@ include file="../layout/taglib.jsp"%>
 
-<h1>${request.id}</h1>
 <div class="container" style="margin-top: 100px;">
 
 	<div class="panel panel-default">

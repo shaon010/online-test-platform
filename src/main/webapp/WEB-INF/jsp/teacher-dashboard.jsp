@@ -29,30 +29,16 @@
           </div>
           <div class="panel-body">       
              <div class="row">
+                 <c:forEach items="${teacherCourses}" var="course">
                <div class="col-md-2">
-                  <a href="Tcourse-page.html" class="thumbnail">
+                  <a href="createquiz/${course.id}.html" class="thumbnail">
                     <img src="<c:url value='/resources/images/database.jpg'/>" alt="..." class="col-lg-12">
                       <div class="caption" style="margin-top:-25px;">
-                         <h3>Database</h3>                         
+                         <h3>${course.title}</h3>
                       </div>
                   </a>
                 </div>
-                <div class="col-md-2">
-                   <a href="Tcourse-page.html" class="thumbnail">
-                     <img src="<c:url value='/resources/images/database.jpg'/>" alt="..." class="col-lg-12">
-                       <div class="caption" style="margin-top:-25px;">
-                          <h3>Java</h3>                           
-                        </div>
-                      </a>
-                    </div>
-                    <div class="col-md-2">
-                      <a href="Tcourse-page.html" class="thumbnail">
-                        <img src="<c:url value='/resources/images/database.jpg'/>" alt="..." class="col-lg-12">
-                        <div class="caption" style="margin-top:-25px;">
-                           <h3>Network</h3>                           
-                        </div>
-                      </a>
-                    </div>
+                 </c:forEach>
                 </div>
                   <a href="course.html" class="pull-right">View More..</a>
             </div>

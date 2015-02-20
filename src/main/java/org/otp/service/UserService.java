@@ -5,8 +5,10 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.otp.entity.Course;
 import org.otp.entity.Role;
 import org.otp.entity.Users;
+import org.otp.repository.CourseRepository;
 import org.otp.repository.RoleRepository;
 import org.otp.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,7 @@ public class UserService {
 
 	@Autowired
 	private RoleRepository roleRepository;
+
 	
 
 	public Users findOne(int id) {

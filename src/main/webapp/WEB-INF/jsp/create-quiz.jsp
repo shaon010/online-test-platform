@@ -20,7 +20,7 @@
       
      <div class="col-lg-2">
       <img src="<c:url value='/resources/images/database.jpg'/>" alt="...">
-      <h1>Java</h1> 
+      <h1>${course.title}</h1>
       <a href="#" class="btn btn-default">Delete Course</a>
      </div>
 <div class="col-lg-10">
@@ -306,8 +306,11 @@
                 </li>
                 
                 <div class="col-lg-3 inline">
-                       <a href="#" class="btn btn-success btn-md">Accept</a>
+                    <form action="/acceptCourseRequest/${request.course.id}.html" >
+                        <input type="hidden" value="${request.user.id}" name="studentId">
+                       <button type="submit" class="btn btn-success btn-md">Accept</button>
                        <a href="#" class="btn btn-danger btn-md">Reject</a>
+                    </form>
                   </div><hr>
              </ul>
            </div><!--end panel-body-->

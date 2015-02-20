@@ -9,7 +9,7 @@ import org.otp.entity.Course;
 import org.otp.entity.CourseJoinRequest;
 import org.otp.entity.CourseStudents;
 import org.otp.entity.Users;
-import org.otp.repository.CourseAnnouncementReository;
+import org.otp.repository.CourseAnnouncementRepository;
 import org.otp.repository.CourseJoinRequestRepository;
 import org.otp.repository.CourseRepository;
 import org.otp.repository.CourseStudentsRepository;
@@ -36,7 +36,7 @@ public class CourseService {
 	private CourseStudentsRepository courseStudentsRepository;
 	
 	@Autowired
-	private CourseAnnouncementReository courseAnnouncementReository;
+	private CourseAnnouncementRepository courseAnnouncementRepository;
 
 	public void save(Course course, String name) {
 		Users user = userRepository.findByUsername(name);
@@ -46,12 +46,10 @@ public class CourseService {
 	}
 
 	public List<Course> getAllCourse() {
-		// TODO Auto-generated method stub
 		return courseRepository.findAll(new PageRequest(0, 20, Direction.DESC, "startDate")).getContent();
 	}
 
 	public Course findById(int id) {
-		// TODO Auto-generated method stub
 		return courseRepository.findOne(id);
 	}
 
@@ -82,11 +80,27 @@ public class CourseService {
 		return courseJoinRequestRepository.findByUserAndCourse(user,course);
 	}
 
-	public List<CourseJoinRequest> findAllRequest() {
-		// TODO Auto-generated method stub
-		return courseJoinRequestRepository.findAll();
-		
+	public List<CourseJoinRequest> findAllRequestByCourse(String teacher, int id) {
+        Users user =userRepository.findByUsername(teacher);
+        Course course=courseRepository.findOne(id);
+		return courseJoinRequestRepository.findAllByCourse(course);
 	}
+
+    public List<Course> findAllByTeacher(String teacher) {
+        Users user=userRepository.findByUsername(teacher);
+        return courseRepository.findAllByUser(user);
+    }
+
+    public void addCourseStudent(int courseId, int studentId) {
+        Course course=courseRepository.findOne(courseId);
+        Users user=userRepository.findOne(studentId);
+        CourseStudents courseStudents=new CourseStudents();
+        CourseJoinRequest courseJoinRequest=new CourseJoinRequest();
+        courseStudents.setCourse(course);
+        courseStudents.setUser(user);
+        courseStudentsRepository.save(courseStudents);
+        courseJoinRequestRepository.delete(courseJoinRequestRepository.findByCourseAndUser(course,user));
+    }
 
 	
 	

@@ -88,7 +88,7 @@ public class InitDbService {
 					+ "markdown, git, GitHub, R, and RStudio.");
 			course1.setStartDate("2014-10-01");
 			course1.setPublishedDate(new Date());
-			course1.setTitle("Engish");
+			course1.setTitle("Software Engineering");
 			course1.setUser(userTeacher);
 			course1.setFaq1("Accomplishment?");
 			course1.setFaq1ans("Yes");
@@ -108,7 +108,7 @@ public class InitDbService {
 					+ "markdown, git, GitHub, R, and RStudio.");
 			course2.setStartDate("2014-10-05");
 			course2.setPublishedDate(new Date());
-			course2.setTitle("Bangla");
+			course2.setTitle("Data Mining");
 			course2.setUser(userTeacher);
 			course2.setFaq1("Accomplishment?");
 			course2.setFaq1ans("Yes");
@@ -128,7 +128,7 @@ public class InitDbService {
 					+ "markdown, git, GitHub, R, and RStudio.");
 			course3.setStartDate("2014-10-10");
 			course3.setPublishedDate(new Date());
-			course3.setTitle("Engish");
+			course3.setTitle("Java");
 			course3.setUser(userTeacher);
 			course3.setFaq1("Accomplishment?");
 			course3.setFaq1ans("Yes");
