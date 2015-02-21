@@ -12,12 +12,11 @@
 						<div class="Text-center">
 						<c:if test="${quiz!=null}">
 							<center>
-								<h2>Title: ${quiz.title}</h2>
-								<br>
+								<h2>Quiz Title: ${quiz.title}</h2>
+                                <h4>Course: ${quiz.course.title}</h4>
 								<h4>Each question point: ${quiz.point}</h4>
-								<br>
 								<h4>Exam duration: ${quiz.duration} minute</h4>
-								<hr>
+
 							</center>
 							</c:if>
 						</div>
@@ -94,9 +93,9 @@
 						<!--end row-->
 						<div class="text-center">
 							<a
-								href='<spring:url value="/saveQuizQuestion.html"></spring:url>'
+								href='<spring:url value="/saveQuizQuestion/${quiz.course.id}.html"></spring:url>'
 								class="btn btn-success">Finish</a> <a
-								href="<spring:url value="/clearsession.html"></spring:url>"
+								href="<spring:url value="/clearsession/${quiz.course.id}.html"></spring:url>"
 								class="btn btn-danger">Cancel</a>
 						</div>
 						<br> <br>

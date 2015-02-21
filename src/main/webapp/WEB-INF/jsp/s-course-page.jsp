@@ -8,10 +8,10 @@
 		<div class="container">
      <div class="row">
       <div class="col-lg-4">
-       <img src="database.jpg" alt="...">
-        <div class="caption">
-          <h3>Database</h3>
-          <p><small>S.Akhter Hossain<br>Daffodil International University<br>Depart.Head CSE</small></p>
+       <img src="<c:url value='/resources/images/database.jpg'/>" alt="...">
+          <div class="caption">
+          <h3>${course.title}</h3>
+          <p><small>${course.user.name}<br>${course.user.uvname}<br>${course.user.position}</small></p>
           <a href="#" class="btn btn-primary" role="button">Leave</a>
         </div>
       </div> 
@@ -22,7 +22,6 @@
           </ul><br>
         <div class="tab-content">
          <div class="tab-pane fade in active" id="list">
-         
           <table class="table table-striped">
           <tr>
           <!--  <th>No</th> -->
@@ -35,24 +34,30 @@
           <c:forEach items="${quizes}" var="quiz">
           <tr>
             <!-- <td>1</td> -->
-              <c:forEach items="${results}" var="result">
-                  <c:if test="${result.quiz.id==quiz.id}">
-                 <td class="triggerRemove" data-toggle="modal" data-target="#myModal">${quiz.title}</td>
-              </c:if>
-                  <c:if test="${result.quiz.id!=quiz.id}">
-                  <td><a href="<spring:url value="/quiz/attend/${quiz.id}.html" />" class="triggerRemove" data-toggle="modal" data-target="#myModal">${quiz.title}</a></td>
-              </c:if>
-
-              <td>${quiz.startDate}</td>
-            <td>${quiz.endDate}</td>
-
-              <c:if test="${result.quiz.id==quiz.id}">
+              <c:if test="${results.size()!=0}">
+              <c:if test="${completedQuizIdList.contains(quiz.id)}">
+                  <c:forEach items="${results}" var="result">
+                      <c:if test="${result.quiz.id==quiz.id}">
+                 <td>${quiz.title}</td>
+                  <td>${quiz.startDate}</td>
+                  <td>${quiz.endDate}</td>
                   <td >${result.obtainedMarks}</td>
+                      </c:if>
+                  </c:forEach>
               </c:if>
-                  <c:if test="${result.quiz.id!=quiz.id}">
-                      <td >N/A</td>
-                  </c:if>
-              </c:forEach>
+              <c:if test="${completedQuizIdList.contains(quiz.id)==false}">
+                  <td><a href="<spring:url value="/quiz/attend/${quiz.id}.html" />" class="triggerRemove" data-toggle="modal" data-target="#myModal">${quiz.title}</a></td>
+                  <td>${quiz.startDate}</td>
+                  <td>${quiz.endDate}</td>
+                  <td >N/A</td>
+              </c:if>
+              </c:if>
+              <c:if test="${results.size()==0}">
+                  <td><a href="<spring:url value="/quiz/attend/${quiz.id}.html" />" class="triggerRemove" data-toggle="modal" data-target="#myModal">${quiz.title}</a></td>
+                  <td>${quiz.startDate}</td>
+                  <td>${quiz.endDate}</td>
+                  <td >N/A</td>
+              </c:if>
           </tr>
           </c:forEach>
           </c:if>  

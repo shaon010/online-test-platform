@@ -231,7 +231,7 @@
        </div>
        
       			 <div class="container text-center"> 
-                  <a href='<spring:url value="/clearsession.html"></spring:url>' class="btn btn-danger ">Cancel</a>
+                  <a href='<spring:url value="/clearsession/${course.id}.html"></spring:url>' class="btn btn-danger ">Cancel</a>
                   <a href='<spring:url value="/preview.html"></spring:url>' onclick="submitQuizForm();" class="btn btn-default ">Preview</a>
                 </div>
        </div>
@@ -417,11 +417,11 @@
 			} 
 		});
 	}
-	function submitQuizForm() {
-		
+	function submitQuizForm(e) {
+       // e.preventDefault();
 		$.ajax({
 			type : "post",
-			url : "<spring:url value="/storequiz.html"></spring:url>",
+			url : "<spring:url value="/storequiz/${course.id}.html"></spring:url>",
 			cache : false,
 			data : $('#quizform').serialize(),
 			 success : function(response) {

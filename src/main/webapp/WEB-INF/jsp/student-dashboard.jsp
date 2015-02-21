@@ -23,27 +23,19 @@
                 </div><hr>
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-md-2">
-                            <a href="course-pase.html" class="thumbnail">
-                                <img src="database.jpg" alt="..." class="col-lg-12">
-                                <h3>Database</h3>
-                                <p><small>S.Akhter Hossain</small></p></a>
-                            <a href="#" class="btn btn-primary" role="button">Leave</a>
-                        </div>
-                        <div class="col-md-2">
-                            <a href="course-pase.html" class="thumbnail">
-                                <img src="database.jpg" alt="..." class="col-lg-12">
-                                <h3>Java</h3>
-                                <p><small>S.Akhter Hossain</small></p></a>
-                            <a href="#" class="btn btn-primary" role="button">Leave</a>
-                        </div>
-                        <div class="col-md-2">
-                            <a href="course-pase.html" class="thumbnail">
-                                <img src="database.jpg" alt="..." class="col-lg-12">
-                                <h3>Network</h3>
-                                <p><small>S.Akhter Hossain</small></p> </a>
-                            <a href="#" class="btn btn-primary" role="button">Leave</a>
-                        </div>
+
+                            <c:forEach items="${studentCourses}" var="studentCourse">
+                                <div class="col-md-2">
+                                    <a href="<spring:url value="/studentCoursePage/${studentCourse.course.id}.html"/>" class="thumbnail">
+                                        <img src="<c:url value='/resources/images/database.jpg'/>" alt="..." class="col-lg-12">
+                                        <div class="caption" style="margin-top:-25px;">
+                                            <h3>${studentCourse.course.title}</h3>
+                                            <p><small>${studentCourse.course.user.name}</small></p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </c:forEach>
+
                     </div>
                     <a href="course.html" class="pull-right">View More..</a>
                 </div>
@@ -57,7 +49,7 @@
                     <div class="row">
                         <div class="col-md-2">
                             <div class="thumbnail">
-                                <img src="database.jpg" alt="..." class="col-lg-12">
+                                <img src="<c:url value='/resources/images/database.jpg'/>" alt="..." class="col-lg-12">
                                 <div class="caption" style="margin-top:-25px;">
                                     <h3>Database</h3>
                                     <p><small>S.Akhter Hossain</small></p>
@@ -67,7 +59,7 @@
                         </div>
                         <div class="col-md-2">
                             <div class="thumbnail">
-                                <img src="database.jpg" alt="..." class="col-lg-12">
+                                <img src="<c:url value='/resources/images/database.jpg'/>" alt="..." class="col-lg-12">
                                 <div class="caption" style="margin-top:-25px;">
                                     <h3>Java</h3>
                                     <p><small>S.Akhter Hossain</small></p>
@@ -77,7 +69,7 @@
                         </div>
                         <div class="col-md-2">
                             <div class="thumbnail">
-                                <img src="database.jpg" alt="..." class="col-lg-12">
+                                <img src="<c:url value='/resources/images/database.jpg'/>" alt="..." class="col-lg-12">
                                 <div class="caption" style="margin-top:-25px;">
                                     <h3>Network</h3>
                                     <p><small>S.Akhter Hossain</small></p>
@@ -98,7 +90,7 @@
                     <div class="row">
                         <div class="col-md-2">
                             <div class="thumbnail">
-                                <img src="database.jpg" alt="..." class="col-lg-12">
+                                <img src="<c:url value='/resources/images/database.jpg'/>" alt="..." class="col-lg-12">
                                 <div class="caption" style="margin-top:-25px;">
                                     <h3>Database</h3>
                                     <p><small>S.Akhter Hossain<br>DIU<br>Depart.Head CSE</small></p>
@@ -108,7 +100,7 @@
                         </div>
                         <div class="col-md-2">
                             <div class="thumbnail">
-                                <img src="database.jpg" alt="..." class="col-lg-12">
+                                <img src="<c:url value='/resources/images/database.jpg'/>" alt="..." class="col-lg-12">
                                 <div class="caption" style="margin-top:-25px;">
                                     <h3>Java</h3>
                                     <p><small>S.Akhter Hossain<br>AIUB<br>Depart.Head CSE</small></p>
@@ -118,7 +110,7 @@
                         </div>
                         <div class="col-md-2">
                             <div class="thumbnail">
-                                <img src="database.jpg" alt="..." class="col-lg-12">
+                                <img src="<c:url value='/resources/images/database.jpg'/>" alt="..." class="col-lg-12">
                                 <div class="caption" style="margin-top:-25px;">
                                     <h3>Network</h3>
                                     <p><small>S.Akhter Hossain<br>BRACS<br>Depart.Head CSE</small></p>

@@ -17,6 +17,8 @@ public class QuizService {
 
 	@Autowired
 	private UserRepository userRepository;
+    @Autowired
+	private CourseRepository courseRepository;
 
 	@Autowired
 	private RoleRepository roleRepository;
@@ -59,8 +61,8 @@ public class QuizService {
 
 	}
 
-	public List<Quiz> findAllQuizes() {
-		return quizRepository.findAll();
+	public List<Quiz> findAllQuizesByCourse(int courseId) {
+		return quizRepository.findAllByCourse_Id(courseId);
 	}
 
 	public Quiz findById(int id) {
@@ -158,8 +160,18 @@ public class QuizService {
         resultRepository.save(result);
         }
 
-    public List<Result> findResultsByUser(Users user) {
-        return resultRepository.findAllByUser(user);
+    public List<Result> findResultsByUserAndCourse(Users user, int courseId) {
+        return resultRepository.findAllByUserAndQuiz_Course_Id(user,courseId);
+    }
+
+    public List<Integer> findAllQuizeByUserAndCourse(Users user, int courseId) {
+        List<Quiz> quizList=new ArrayList<Quiz>();
+        List<Integer> quizIdList=new ArrayList<Integer>();
+        List<Result> resultList= resultRepository.findAllByUserAndQuiz_Course_Id(user,courseId);
+        for (Result result: resultList){
+            quizIdList.add(result.getQuiz().getId());
+        }
+        return quizIdList;
     }
 }
 

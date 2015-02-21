@@ -4,10 +4,8 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-
 import org.otp.entity.*;
 import org.otp.service.CourseService;
 import org.otp.service.QuizService;
@@ -54,9 +52,8 @@ public class CourseController {
 
 	@RequestMapping("/createquiz/{id}")
 	public String createQuizinInit(Model model, Principal principal,@PathVariable int id) {
-        String teacher=principal.getName();
         model.addAttribute("course", courseService.findById(id));
-		model.addAttribute("request", courseService.findAllRequestByCourse(teacher, id));
+		model.addAttribute("request", courseService.findAllRequestByCourse(id));
 		return "createquiz";
 	}
 
@@ -65,12 +62,14 @@ public class CourseController {
 		return "createcourse";
 	}
 
-	@RequestMapping("/studentCoursePage")
-	public String studentCoursePageInit(Model model, Principal principal) {
+	@RequestMapping("/studentCoursePage/{courseId}")
+	public String studentCoursePageInit(Model model, Principal principal,@PathVariable int courseId) {
         String userName=principal.getName();
         Users user=userService.findOne(userName);
-        model.addAttribute("quizes", quizService.findAllQuizes());
-        model.addAttribute("results",quizService.findResultsByUser(user));
+        model.addAttribute("course",courseService.findById(courseId));
+        model.addAttribute("quizes", quizService.findAllQuizesByCourse(courseId));
+        model.addAttribute("results",quizService.findResultsByUserAndCourse(user, courseId));
+        model.addAttribute("completedQuizIdList",quizService.findAllQuizeByUserAndCourse(user, courseId));
         return "studentCoursePage";
 	}
 	@RequestMapping("/quiz/attend/{id}")
@@ -82,8 +81,7 @@ public class CourseController {
     @RequestMapping("/acceptCourseRequest/{courseId}")
 	public String acceptCourseRequest(Model model, Principal principal,@PathVariable int courseId,@RequestParam int studentId) {
 		courseService.addCourseStudent(courseId,studentId);
-        System.out.println("Shaon");
-		return "redirect:createcourse";
+		return "redirect:/createquiz/{courseId}.html";
 	}
 
 
@@ -116,10 +114,12 @@ public class CourseController {
 		return "redirect:/createcourse.html";
 	}
 
-	@RequestMapping(value="/storequiz", method=RequestMethod.POST)
-	public String quizAjaxCall(Model model,@ModelAttribute("quiz") Quiz quiz, BindingResult result,HttpSession session) {
-		  session.setAttribute("quiz", quiz);
-		return "preview";
+	@RequestMapping(value="/storequiz/{courseId}", method=RequestMethod.POST)
+	public String quizAjaxCall(Model model,@ModelAttribute("quiz") Quiz quiz,@PathVariable int courseId, BindingResult result,HttpSession session) {
+        Course course=courseService.findById(courseId);
+        quiz.setCourse(course);
+		session.setAttribute("quiz", quiz);
+		return "redirect:/preview.html";
 	}
 	@RequestMapping("/joinrequest/{id}")
 	public String sendJoinRequest(Model model, Principal principal,@PathVariable int id) {
@@ -131,8 +131,8 @@ public class CourseController {
 		//model.addAttribute("course",courseService.getAllCourse() );
 		return "redirect:/index.html";
 	}
-	@RequestMapping(value="/saveQuizQuestion.html")
-	public String SaveQuizquestion(HttpSession session) {
+	@RequestMapping(value="/saveQuizQuestion/{courseId}.html")
+	public String SaveQuizquestion(HttpSession session, @PathVariable int courseId) {
 		List<Mcq> mcqList= new ArrayList<Mcq>();
 		List<TF> tfList= new ArrayList<TF>();
 		List<ShortQue> sqList= new ArrayList<ShortQue>();
@@ -167,7 +167,7 @@ public class CourseController {
 		session.removeAttribute("mcq");
 		session.removeAttribute("sq");
 		session.removeAttribute("tf");
-		return "createquiz";
+        return "redirect:/createquiz/{courseId}.html";
 	}
 
 	@RequestMapping(value="/preview")
@@ -181,13 +181,13 @@ public class CourseController {
 		return "preview";
 	}
 
-	@RequestMapping("/clearsession")
-	public String clearSession(Model model, Principal principal,HttpSession session) {
+	@RequestMapping("/clearsession/{courseId}")
+	public String clearSession(Model model, Principal principal,HttpSession session, @PathVariable int courseId) {
 
 		session.removeAttribute("mcq");
 		session.removeAttribute("sq");
 		session.removeAttribute("tf");
-		return "createquiz";
+		return "redirect:/createquiz/{courseId}.html";
 	}
 
 /*

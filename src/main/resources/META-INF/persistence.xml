@@ -14,5 +14,6 @@
 		<class>org.otp.entity.SubmittedAnsMcq</class>
 		<class>org.otp.entity.SubmittedAnsTF</class>
 		<class>org.otp.entity.SubmittedAnsShortQue</class>
+		<class>org.otp.entity.Result</class>
 	</persistence-unit>
 </persistence>

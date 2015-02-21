@@ -128,7 +128,7 @@
             contentType: 'application/json',
             success: function () {
                 alert('Successfully submitted!!');
-                location.href = "/studentCoursePage.html?success=true"
+                location.href = "/studentCoursePage/${quiz.course.id}.html?success=true"
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 alert('An error has occured!! :-(')

@@ -63,7 +63,7 @@
 		<put-attribute name="current" value="createcourse" />
 	</definition>
 	<definition name="aboutcourse" extends="common">
-		<put-attribute name="title" value="Create Quiz" />
+		<put-attribute name="title" value="Course Description" />
 		<put-attribute name="body" value="/WEB-INF/jsp/about-course.jsp" />
 		<put-attribute name="current" value="createcourse" />
 	</definition>

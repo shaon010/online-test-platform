@@ -34,9 +34,9 @@ public class UserController {
 	}
     @RequestMapping("/studentDashboard")
 	public String studentDashboard(Model model, Principal principal) {
-		/*String name = principal.getName();
-		model.addAttribute("user", userService.findOneWithPosts(name));*/
-		return "studentDashboard";
+		String student = principal.getName();
+        model.addAttribute("studentCourses", courseService.findAllByStudent(student));
+        return "studentDashboard";
 	}
 	
 	

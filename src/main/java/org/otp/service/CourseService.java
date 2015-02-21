@@ -80,8 +80,7 @@ public class CourseService {
 		return courseJoinRequestRepository.findByUserAndCourse(user,course);
 	}
 
-	public List<CourseJoinRequest> findAllRequestByCourse(String teacher, int id) {
-        Users user =userRepository.findByUsername(teacher);
+	public List<CourseJoinRequest> findAllRequestByCourse( int id) {
         Course course=courseRepository.findOne(id);
 		return courseJoinRequestRepository.findAllByCourse(course);
 	}
@@ -101,6 +100,10 @@ public class CourseService {
         courseStudentsRepository.save(courseStudents);
         courseJoinRequestRepository.delete(courseJoinRequestRepository.findByCourseAndUser(course,user));
     }
+
+    public List<CourseStudents> findAllByStudent(String student) {
+        Users user=userRepository.findByUsername(student);
+        return courseStudentsRepository.findAllByUser(user);    }
 
 	
 	
