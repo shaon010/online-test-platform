@@ -79,7 +79,6 @@
                   <li class="${current == 'teacherDashboard' ? 'active' : ''}"><a href="<spring:url value="/teacherDashboard.html" />">Teacher Dashboard </a></li>
               </security:authorize>
               <security:authorize access="hasRole('ROLE_STUDENT')">
-              	<li class="${current == 'studentCoursePage' ? 'active' : ''}"><a href="<spring:url value="/studentCoursePage.html" />">Course Page</a></li>
                   <li class="${current == 'studentDashboard' ? 'active' : ''}"><a href="<spring:url value="/studentDashboard.html" />">Student Dashboard</a></li>
               </security:authorize>
               <security:authorize access="isAuthenticated()">
