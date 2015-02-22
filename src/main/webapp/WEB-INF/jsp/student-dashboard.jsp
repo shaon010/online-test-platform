@@ -7,11 +7,11 @@
     <div class="row">
         <div class="col-lg-2">
             <a class="" href="#">
-                <img class="col-lg-12" src="student.png" alt="...">
+                <img src="<c:url value='/resources/images/database.jpg'/>" alt="...">
             </a>
-            <div class="">
-                <h4>Raju</h4>
-                <p>Daffodil International University<br>Dept. of CSE</p>
+            <div class="caption">
+                <h4>${studentCourses.get(0).user.name}</h4>
+                <p>${studentCourses.get(0).user.uvname}</p>
             </div>
         </div><!--end col-lg-2-->
 

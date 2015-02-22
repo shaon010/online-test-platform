@@ -27,7 +27,7 @@
 							<div class="col-lg-8" style="padding-left: 30px;">
 								<c:if test="${quiz.mcqList!=null}">
 									<h3>MCQ</h3>
-									<c:forEach items="${quiz.mcqList}" var="mcq">
+									<c:forEach items="${quiz.mcqList.size()!=0}" var="mcq">
 										<h4>
 											${mcq.question}
 										</h4>
@@ -53,7 +53,7 @@
 										<br>
 									</c:forEach>
 								</c:if>
-								<c:if test="${quiz.tfList!=null}">
+								<c:if test="${quiz.tfList.size()!=0}">
 									<br>
 									<br>
                                     <div>
@@ -80,7 +80,7 @@
                                     </div>
 								</c:if>
 
-								<c:if test="${quiz.sqList!=null}">
+								<c:if test="${quiz.sqList.size()!=0}">
 									<br>
 									<br>
 									<h3>Short Questions</h3>
