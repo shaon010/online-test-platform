@@ -10,8 +10,8 @@
                 <img src="<c:url value='/resources/images/database.jpg'/>" alt="...">
             </a>
             <div class="caption">
-                <h4>${studentCourses.get(0).user.name}</h4>
-                <p>${studentCourses.get(0).user.uvname}</p>
+                <h4>${student.name}</h4>
+                <p>${student.uvname}</p>
             </div>
         </div><!--end col-lg-2-->
 

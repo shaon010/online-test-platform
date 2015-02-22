@@ -36,6 +36,7 @@ public class UserController {
 	public String studentDashboard(Model model, Principal principal) {
 		String student = principal.getName();
         model.addAttribute("studentCourses", courseService.findAllByStudent(student));
+        model.addAttribute("student", userService.findOne(student));
         return "studentDashboard";
 	}
 	
