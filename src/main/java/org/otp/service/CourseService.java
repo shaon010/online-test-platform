@@ -105,6 +105,10 @@ public class CourseService {
         Users user=userRepository.findByUsername(student);
         return courseStudentsRepository.findAllByUser(user);    }
 
+    public List<CourseStudents> findAllStudentByCourse(int courseId) {
+        return courseStudentsRepository.findAllByCourse_Id(courseId);
+    }
+
 	
 	
 	

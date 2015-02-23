@@ -50,10 +50,11 @@ public class CourseController {
 		return new ShortQue();
 	}
 
-	@RequestMapping("/createquiz/{id}")
-	public String createQuizinInit(Model model, Principal principal,@PathVariable int id) {
-        model.addAttribute("course", courseService.findById(id));
-		model.addAttribute("request", courseService.findAllRequestByCourse(id));
+	@RequestMapping("/createquiz/{courseId}")
+	public String createQuizinInit(Model model, Principal principal,@PathVariable int courseId) {
+        model.addAttribute("course", courseService.findById(courseId));
+		model.addAttribute("request", courseService.findAllRequestByCourse(courseId));
+		model.addAttribute("courseStudent", courseService.findAllStudentByCourse(courseId));
 		return "createquiz";
 	}
 

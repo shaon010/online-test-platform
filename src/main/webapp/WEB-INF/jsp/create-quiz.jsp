@@ -255,7 +255,8 @@
            <div class="panel-heading text-center">
              <h2> Student list</h2>
            </div><!--end panel-heading-->
-           
+           <c:if test="${courseStudent.size()!=0}">
+               <c:forEach items="${courseStudent}" var="student">
            <div class="panel-body">
              <ul class="media-list">
                 <li class="media col-lg-11">
@@ -263,14 +264,15 @@
                     <img class="media-object col-sm-7" src="<c:url value='/resources/images/student.png'/>" alt="...">
                    </a>
                   <div class="media-body">
-                    <h2 class="media-heading">Raju</h2>
-                    <p>DIU<br>ID:111-15-1350</p>         
+                    <h4 class="media-heading">${student.user.name}</h4>
+                    <p>${student.user.name}<br>{Id:}</p>
                   </div>
                 </li>
                 <a href="#" class="btn btn-default col-lg-1">Remove</a>  <hr>
              </ul>
            </div><!--end panel-body-->
-          
+            </c:forEach>
+           </c:if>
          </div><!--end-panel-->
        </div><!--end-section-4-->
        
