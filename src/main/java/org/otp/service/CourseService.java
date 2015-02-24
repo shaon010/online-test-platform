@@ -63,15 +63,6 @@ public class CourseService {
 		courseJoinRequestRepository.save(courseJoinRequest);
 
 	}
-	public void saveCourseStudent(int id, String name) {
-		Users user = userRepository.findByUsername(name);
-		Course course = courseRepository.findOne(id);
-		CourseStudents courseStudent=new CourseStudents();
-		courseStudent.setCourse(course);
-		courseStudent.setUser(user);
-		courseStudent.setJoinDate(new Date());
-		courseStudentsRepository.save(courseStudent);		
-	}
 
 	public CourseJoinRequest findByUserFromRequest(String name, int id) {
 		Users user = userRepository.findByUsername(name);

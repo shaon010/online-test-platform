@@ -71,11 +71,11 @@
                           <div class="form-group ">             
                             <label for="1st"class="col-lg-1 control-label">Date</label>
                                <div class="col-lg-5">
-                                 <form:input type="date" path="startDate" class=" form-control" placeholder="mm/dd/yyyy"/>  
+                                 <form:input path="startDate" type="text" class="form-control date-picker"  placeholder="mm/dd/yyyy" />
                                 </div>
                             <label for="2st"class="col-lg-1 control-label">To</label>
                                <div class="col-lg-5">
-                                 <form:input type="date" path="endDate" class=" form-control" placeholder="mm/dd/yyyy"/>  
+                                 <form:input type="text" path="endDate" class=" form-control date-picker" placeholder="mm/dd/yyyy"/>
                                 </div> 
                           </div>                     
                       
@@ -433,5 +433,10 @@
 			} 
 		});
 	}
-
+    $('.date-picker').datepicker({
+        todayBtn: "linked",
+        autoclose: true,
+        format: 'yyyy/mm/dd',
+        todayHighlight: true
+    });
 </script>
