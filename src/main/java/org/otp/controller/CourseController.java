@@ -55,6 +55,7 @@ public class CourseController {
         model.addAttribute("course", courseService.findById(courseId));
 		model.addAttribute("request", courseService.findAllRequestByCourse(courseId));
 		model.addAttribute("courseStudent", courseService.findAllStudentByCourse(courseId));
+        model.addAttribute("courseQuiz", quizService.findAllQuizesByCourse(courseId));
 		return "createquiz";
 	}
 
@@ -73,10 +74,19 @@ public class CourseController {
         model.addAttribute("completedQuizIdList",quizService.findAllQuizeByUserAndCourse(user, courseId));
         return "studentCoursePage";
 	}
+
+    @RequestMapping(value = "/quiz/delete/{courseId}/{quizId}")
+	public String deleteQuiz(Model model, Principal principal,@PathVariable int quizId,@PathVariable int courseId) {
+        String userName=principal.getName();
+        Course course= quizService.inactiveQuizById(quizId);
+        courseId=course.getId();
+        return "redirect:/createquiz/{courseId}.html";
+	}
+
 	@RequestMapping("/quiz/attend/{id}")
 	public String attendQuizInit(Model model, Principal principal,@PathVariable int id) {
 		model.addAttribute("quiz", quizService.findById(id));
-		return "exampaper";
+		return "createquiz";
 	}
 
     @RequestMapping("/acceptCourseRequest/{courseId}")
@@ -121,6 +131,16 @@ public class CourseController {
         quiz.setCourse(course);
 		session.setAttribute("quiz", quiz);
 		return "redirect:/preview.html";
+	}
+	@RequestMapping(value="/course/removeStudent/{courseId}/{studentId}")
+	public String removeStudent(Model model,@PathVariable int studentId,@PathVariable int courseId) {
+        courseService.removeStudentFromCourse(courseId , studentId);
+        return "redirect:/createquiz/{courseId}.html";
+	}
+    @RequestMapping(value="/course/delete/{courseId}")
+	public String removeStudent(Model model,@PathVariable int courseId) {
+        courseService.removeCourse(courseId);
+        return "redirect:/teacherDashboard.html";
 	}
 	@RequestMapping("/joinrequest/{id}")
 	public String sendJoinRequest(Model model, Principal principal,@PathVariable int id) {

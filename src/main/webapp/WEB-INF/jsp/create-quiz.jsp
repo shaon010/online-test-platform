@@ -21,8 +21,14 @@
      <div class="col-lg-2">
       <img src="<c:url value='/resources/images/database.jpg'/>" alt="...">
       <h1>${course.title}</h1>
-      <a href="#" class="btn btn-default">Delete Course</a>
+      <a class="btn btn-danger" href="<spring:url value="/course/delete/${course.id}.html"/>">Delete</a>
      </div>
+
+
+
+
+
+
 <div class="col-lg-10">
        <ul class="nav nav-tabs">
           <li class="active"><a href="#section-1" data-toggle="tab">Announcement</a></li>          
@@ -71,11 +77,11 @@
                           <div class="form-group ">             
                             <label for="1st"class="col-lg-1 control-label">Date</label>
                                <div class="col-lg-5">
-                                 <form:input path="startDate" type="text" class="form-control date-picker"  placeholder="mm/dd/yyyy" />
+                                 <form:input path="startDate" type="text" class="form-control date-picker"  placeholder="yyyy/mm/dd" />
                                 </div>
                             <label for="2st"class="col-lg-1 control-label">To</label>
                                <div class="col-lg-5">
-                                 <form:input type="text" path="endDate" class=" form-control date-picker" placeholder="mm/dd/yyyy"/>
+                                 <form:input type="text" path="endDate" class=" form-control date-picker" placeholder="yyyy/mm/dd"/>
                                 </div> 
                           </div>                     
                       
@@ -257,8 +263,8 @@
            </div><!--end panel-heading-->
            <c:if test="${courseStudent.size()!=0}">
                <c:forEach items="${courseStudent}" var="student">
-           <div class="panel-body">
-             <ul class="media-list">
+           <div class="panel-body" id="student-list">
+             <ul class="media-list" >
                 <li class="media col-lg-11">
                    <a class="pull-left" href="#">
                     <img class="media-object col-sm-7" src="<c:url value='/resources/images/student.png'/>" alt="...">
@@ -268,7 +274,7 @@
                     <p>${student.user.name}<br>{Id:}</p>
                   </div>
                 </li>
-                <a href="#" class="btn btn-default col-lg-1">Remove</a>  <hr>
+                <a class="btn btn-default col-lg-1" onclick='removeStudent("<spring:url value="/course/removeStudent/${course.id}/${student.user.id}.html"></spring:url>")'>Remove</a>  <hr>
              </ul>
            </div><!--end panel-body-->
             </c:forEach>
@@ -302,7 +308,7 @@
                     <img class="media-object col-sm-7" src="<c:url value='/resources/images/student.png'/>" alt="...">
                    </a>
                   <div class="media-body ">
-                    <h2 class="media-heading">${request.user.username}</h2>
+                    <h2 class="media-heading">${request.user.name}</h2>
                     <p>${request.user.uvname}<br>Dept. of CSE<br>ID:111-15-1350</p>         
                   </div>                  
                 </li>
@@ -334,21 +340,25 @@
        
        
         <div class="tab-pane fade active" id="section-3" style="height:500px;">
-          <table class="table table-striped" id="">
+          <table class="table table-striped" id="manage-table">
           <tr>
            <th>Quiz Title</th>
-           <th>Subject</th>
+           <th>Action</th>
            <th>Start Date</th>
            <th>Valid Date</th> 
            <th>Report</th>
-          </tr> 
+          </tr>
+              <c:if test="${courseQuiz.size()!=0}">
+                  <c:forEach items="${courseQuiz}" var="quiz">
           <tr>
-            <td><a href="#">Basic Knowledge</a></td>
-            <td>Physics</td>
-            <td>01/09/14</td>
-            <td>10/09/14</td>
-            <td>Na</td>
-          </tr>  
+            <td>${quiz.title}</td>
+            <td><button class="btn-danger delete-quiz" href="#" onclick='deletequiz("<spring:url value="/quiz/delete/${course.id}/${quiz.id}.html"></spring:url>")' ><i class="fa fa-trash-o fa-fw"></i></button></td>
+            <td>${quiz.startDate}</td>
+            <td>${quiz.endDate}</td>
+            <td>N/A</td>
+          </tr>
+                  </c:forEach>
+              </c:if>
         </table>
         </div><!--end-section-3-->
       </div><!--end-tab-content-->        
@@ -381,7 +391,39 @@
 			} 
 		});
 	}
-	
+    function deletequiz(url) {
+		$.ajax({
+			type : "get",
+			url : url,
+			cache : false,
+			 success : function(response) {
+			    console.log("deleted");
+                 $("#manage-table").html($(response).find("#manage-table"));
+			    },
+
+			 error : function() {
+
+				 alert('Error while request..');
+			}
+		});
+	}
+    function removeStudent(url) {
+		$.ajax({
+			type : "get",
+			url : url,
+			cache : false,
+			 success : function(response) {
+			    console.log("deleted");
+                 $("#student-list").html($(response).find("#student-list"));
+			    },
+
+			 error : function() {
+
+				 alert('Error while request..');
+			}
+		});
+	}
+
 	function makeAjaxCalltf() {
 		$.ajax({
 			type : "post",
@@ -439,4 +481,5 @@
         format: 'yyyy/mm/dd',
         todayHighlight: true
     });
+
 </script>

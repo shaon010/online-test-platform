@@ -40,7 +40,8 @@ public class Course {
 	private String faq3ans;
 	private String faq4ans;
 	private String faq5ans;
-	
+	private boolean active=true;
+
 	@Column(name = "start_date",columnDefinition="DATE")
 	private String startDate;
 	
@@ -66,9 +67,24 @@ public class Course {
 	
 	@OneToMany(mappedBy = "course", cascade = CascadeType.REMOVE)
 	private List<CourseAnnouncement> courseAnnouncementList;
-	
-	
-	public List<CourseAnnouncement> getCourseAnnouncementList() {
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public List<Quiz> getQuizList() {
+        return quizList;
+    }
+
+    public void setQuizList(List<Quiz> quizList) {
+        this.quizList = quizList;
+    }
+
+    public List<CourseAnnouncement> getCourseAnnouncementList() {
 		return courseAnnouncementList;
 	}
 	public void setCourseAnnouncementList(

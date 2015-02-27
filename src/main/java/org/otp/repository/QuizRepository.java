@@ -10,5 +10,5 @@ import java.util.List;
 public interface QuizRepository extends JpaRepository<Quiz, Integer>{
 
 
-    List<Quiz> findAllByCourse_Id(int course);
+    List<Quiz> findAllByCourse_IdAndActive(int course, boolean active);
 }

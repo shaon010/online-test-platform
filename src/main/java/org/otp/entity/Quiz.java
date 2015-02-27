@@ -22,8 +22,9 @@ public class Quiz {
 	private Integer id;
 
 	private String title;
+    private boolean active=true;
 
-	@Column(name = "start_date",columnDefinition="DATE")
+    @Column(name = "start_date",columnDefinition="DATE")
 	private String startDate;
 	
 	@Column(name = "end_date", columnDefinition="DATE")
@@ -65,7 +66,15 @@ public class Quiz {
 		return endDate;
 	}
 
-	public void setEndDate(String endDate) {
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
 

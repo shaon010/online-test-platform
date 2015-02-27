@@ -1,12 +1,9 @@
 package org.otp.entity;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import org.hibernate.annotations.Type;
+
+import javax.persistence.*;
 
 
 @Entity
@@ -16,7 +13,10 @@ public class CourseAnnouncement {
 	@GeneratedValue
 	private Integer id;
 
-	private String title;
+    @Lob
+    @Type(type = "org.hibernate.type.StringClobType")
+    @Column(length = Integer.MAX_VALUE)
+    private String description;
 	
 	@Column(columnDefinition="TIMESTAMP")
 	private String date;
@@ -33,15 +33,15 @@ public class CourseAnnouncement {
 		this.id = id;
 	}
 
-	public String getTitle() {
-		return title;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-	public String getDate() {
+    public String getDate() {
 		return date;
 	}
 

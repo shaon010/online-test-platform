@@ -62,7 +62,7 @@ public class QuizService {
 	}
 
 	public List<Quiz> findAllQuizesByCourse(int courseId) {
-		return quizRepository.findAllByCourse_Id(courseId);
+		return quizRepository.findAllByCourse_IdAndActive(courseId, true);
 	}
 
 	public Quiz findById(int id) {
@@ -172,6 +172,17 @@ public class QuizService {
             quizIdList.add(result.getQuiz().getId());
         }
         return quizIdList;
+    }
+
+    public void deleteQuizById(int quizId) {
+        quizRepository.delete(quizId);
+    }
+
+    public Course inactiveQuizById(int quizId) {
+        Quiz quiz=quizRepository.findOne(quizId);
+        quiz.setActive(false);
+        quizRepository.save(quiz);
+        return quiz.getCourse();
     }
 }
 

@@ -53,7 +53,7 @@
 		<put-attribute name="current" value="createquiz" />
 	</definition>
 	<definition name="preview" extends="common">
-		<put-attribute name="title" value="Create Quiz" />
+		<put-attribute name="title" value="Preview Question" />
 		<put-attribute name="body" value="/WEB-INF/jsp/preview-question.jsp" />
 		<put-attribute name="current" value="preview" />
 	</definition>

@@ -1,5 +1,6 @@
 package org.otp.service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -28,13 +29,13 @@ public class CourseService {
 
 	@Autowired
 	private CourseRepository courseRepository;
-	
+
 	@Autowired
 	private CourseJoinRequestRepository courseJoinRequestRepository;
-	
+
 	@Autowired
 	private CourseStudentsRepository courseStudentsRepository;
-	
+
 	@Autowired
 	private CourseAnnouncementRepository courseAnnouncementRepository;
 
@@ -46,7 +47,9 @@ public class CourseService {
 	}
 
 	public List<Course> getAllCourse() {
-		return courseRepository.findAll(new PageRequest(0, 20, Direction.DESC, "startDate")).getContent();
+        List<Course> courseList=new ArrayList<Course>();
+             courseList=courseRepository.findAllByActive(true);
+      return courseList;
 	}
 
 	public Course findById(int id) {
@@ -78,7 +81,7 @@ public class CourseService {
 
     public List<Course> findAllByTeacher(String teacher) {
         Users user=userRepository.findByUsername(teacher);
-        return courseRepository.findAllByUser(user);
+        return courseRepository.findAllByUserAndActive(user, true);
     }
 
     public void addCourseStudent(int courseId, int studentId) {
@@ -100,11 +103,21 @@ public class CourseService {
         return courseStudentsRepository.findAllByCourse_Id(courseId);
     }
 
-	
-	
-	
-	
-	
+    public void removeStudentFromCourse(int courseId, int studentId) {
+        courseStudentsRepository.delete(courseStudentsRepository.findAllByCourse_IdAndUser_Id(courseId, studentId));
+    }
+
+    public void removeCourse(int courseId) {
+       Course course = courseRepository.findOne(courseId);
+        course.setActive(false);
+        courseRepository.save(course);
+    }
+
+
+
+
+
+
 /*
 	public List<Users> findAll() {
 		return userRepository.findAll();
@@ -113,8 +126,8 @@ public class CourseService {
 	public Users findOne(int id) {
 		return userRepository.findOne(id);
 	}
-	
-	
+
+
 	public void save(Users user) {
 		user.setEnabled(1);
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -127,7 +140,7 @@ public class CourseService {
 		userRepository.save(user);
 	}
 
-	
+
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public void delete(@P("id")int id) {
 		userRepository.delete(id);

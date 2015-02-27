@@ -38,7 +38,7 @@
          <div class="form-group ">             
                             <label for="1st"class="col-lg-3 control-label">Start Date</label>
                                <div class="col-lg-3">
-                                 <form:input path="startDate" class="date-picker form-control" placeholder="mm/dd/yyyy"/>
+                                 <form:input path="startDate" class="date-picker form-control" placeholder="yyyy/mm/dd"/>
                                 </div>
                             
                           </div> 
@@ -46,7 +46,7 @@
         <div class="form-group">
           <label for="2st"class="col-lg-3 control-label">End Date</label>
                                <div class="col-lg-3">
-                                 <form:input type="text" path="endDate" class="date-picker form-control" placeholder="mm/dd/yyyy"/>
+                                 <form:input type="text" path="endDate" class="date-picker form-control" placeholder="yyyy/mm/dd"/>
                                 </div> 
         </div><br><!--end about course-->
         <div class="form-group">
