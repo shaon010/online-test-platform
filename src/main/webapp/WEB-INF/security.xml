@@ -12,6 +12,10 @@
 		<!-- <intercept-url pattern="/users**" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/users/**" access="hasRole('ROLE_ADMIN')" /> -->
 		<intercept-url pattern="/account**" access="hasRole('ROLE_TEACHER')" />
+		<intercept-url pattern="/createquiz/**" access="hasRole('ROLE_TEACHER')" />
+		<intercept-url pattern="/createcourse**" access="hasRole('ROLE_TEACHER')" />
+		<intercept-url pattern="/teacherDashboard**" access="hasRole('ROLE_TEACHER')" />
+		<intercept-url pattern="/aboutcourse/**" access="isAuthenticated()" />
 		<form-login login-page="/login.html" />
 		<logout logout-url="/logout" />
 		<remember-me key="offersAppKey" />
