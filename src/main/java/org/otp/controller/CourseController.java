@@ -86,7 +86,7 @@ public class CourseController {
 	@RequestMapping("/quiz/attend/{id}")
 	public String attendQuizInit(Model model, Principal principal,@PathVariable int id) {
 		model.addAttribute("quiz", quizService.findById(id));
-		return "createquiz";
+		return "exampaper";
 	}
 
     @RequestMapping("/acceptCourseRequest/{courseId}")

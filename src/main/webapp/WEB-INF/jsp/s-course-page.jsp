@@ -30,7 +30,7 @@
            <th>Valid Date</th> 
            <th>Marks</th>
           </tr> 
-          <c:if test="${quizes!=null}">
+          <c:if test="${quizes!=null && quizes.size()!=0}">
           <c:forEach items="${quizes}" var="quiz">
           <tr>
             <!-- <td>1</td> -->
@@ -46,14 +46,14 @@
                   </c:forEach>
               </c:if>
               <c:if test="${completedQuizIdList.contains(quiz.id)==false}">
-                  <td><a href="<spring:url value="/quiz/attend/${quiz.id}.html" />" class="triggerRemove" data-toggle="modal" data-target="#myModal">${quiz.title}</a></td>
+                  <td><a href="<spring:url value="/quiz/attend/${quiz.id}.html" />" >${quiz.title}</a></td>
                   <td>${quiz.startDate}</td>
                   <td>${quiz.endDate}</td>
                   <td >N/A</td>
               </c:if>
               </c:if>
               <c:if test="${results.size()==0}">
-                  <td><a href="<spring:url value="/quiz/attend/${quiz.id}.html" />" class="triggerRemove" data-toggle="modal" data-target="#myModal">${quiz.title}</a></td>
+                  <td><a href="<spring:url value="/quiz/attend/${quiz.id}.html" />" >${quiz.title}</a></td>
                   <td>${quiz.startDate}</td>
                   <td>${quiz.endDate}</td>
                   <td >N/A</td>

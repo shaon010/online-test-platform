@@ -25,9 +25,9 @@
 						<div class="row">
                             <input type="hidden" name="quizId" value="${quiz.id}"/>
 							<div class="col-lg-8" style="padding-left: 30px;">
-								<c:if test="${quiz.mcqList!=null}">
+								<c:if test="${quiz.mcqList.size()!=0}">
 									<h3>MCQ</h3>
-									<c:forEach items="${quiz.mcqList.size()!=0}" var="mcq">
+									<c:forEach items="${quiz.mcqList}" var="mcq">
 										<h4>
 											${mcq.question}
 										</h4>
