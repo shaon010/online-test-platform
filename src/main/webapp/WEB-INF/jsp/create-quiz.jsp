@@ -237,8 +237,8 @@
        </div>
        
       			 <div class="container text-center"> 
-                  <a href='<spring:url value="/clearsession/${course.id}.html"></spring:url>' class="btn btn-danger ">Cancel</a>
-                  <a href='<spring:url value="/preview.html"></spring:url>' onclick="submitQuizForm();" class="btn btn-default ">Preview</a>
+                  <a href='<spring:url value="/clearsession/${course.id}.html"/>' class="btn btn-danger ">Cancel</a>
+                  <a href='<spring:url value="/preview.html"/>' onclick="submitQuizForm();" class="btn btn-default ">Preview</a>
                 </div>
        </div>
        </div>
@@ -314,7 +314,7 @@
                 </li>
                 
                 <div class="col-lg-3 inline">
-                    <form action="/acceptCourseRequest/${request.course.id}.html" >
+                    <form action='<spring:url value="/acceptCourseRequest/${request.course.id}.html" />' >
                         <input type="hidden" value="${request.user.id}" name="studentId">
                        <button type="submit" class="btn btn-success btn-md">Accept</button>
                        <a href="#" class="btn btn-danger btn-md">Reject</a>

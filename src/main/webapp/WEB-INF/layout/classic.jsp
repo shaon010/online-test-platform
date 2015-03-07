@@ -16,8 +16,10 @@
 
 <link rel="stylesheet" href="<spring:url value='/resources/css/bootstrap.min.css'/>" type="text/css"/>
     <link rel="stylesheet" href="<spring:url value='/resources/css/bootstrap-theme.min.css'/>" />
+    <link rel="stylesheet" href="<spring:url value='/resources/css/font-awesome.min.css'/>" />
     <script src="<spring:url value='/resources/js/jquery-2.1.1.min.js'/>"></script>
     <script src="<spring:url value='/resources/js/bootstrap.min.js'/>"></script>
+    <script src="<spring:url value='/resources/js/bootstrap-datepicker.js'/>"></script>
 
 <!--Bootstrap For offline -->
 

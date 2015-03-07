@@ -11,7 +11,7 @@
 					<c:if test="${quiz!=null}">
 					<div class="body">
 
-                        <form action="/saveQuizAns.html" method="post" id="examPaper">
+                        <form action='<spring:url value="/saveQuizAns.html"/>' method="post" id="examPaper">
 						<div class="Text-center">
 							<center>
 								<h2>Title: ${quiz.title}</h2>
@@ -128,7 +128,7 @@
             contentType: 'application/json',
             success: function () {
                 alert('Successfully submitted!!');
-                location.href = "/studentCoursePage/${quiz.course.id}.html?success=true"
+                location.href = '<spring:url value="/studentCoursePage/${quiz.course.id}.html?success=true"/>'
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 alert('An error has occured!! :-(')
