@@ -274,7 +274,7 @@
                     <p>${student.user.name}<br>{Id:}</p>
                   </div>
                 </li>
-                <a class="btn btn-default col-lg-1" onclick='removeStudent("<spring:url value="/course/removeStudent/${course.id}/${student.user.id}.html"></spring:url>")'>Remove</a>  <hr>
+                <a class="btn btn-default col-lg-1" onclick='removeStudent("<spring:url value="/course/removeStudent/${course.id}/${student.user.id}.html"/>")'>Remove</a>  <hr>
              </ul>
            </div><!--end panel-body-->
             </c:forEach>
@@ -352,7 +352,7 @@
                   <c:forEach items="${courseQuiz}" var="quiz">
           <tr>
             <td>${quiz.title}</td>
-            <td><button class="btn-danger delete-quiz" href="#" onclick='deletequiz("<spring:url value="/quiz/delete/${course.id}/${quiz.id}.html"></spring:url>")' ><i class="fa fa-trash-o fa-fw"></i></button></td>
+            <td><button class="btn-danger delete-quiz" href="#" onclick='deletequiz("<spring:url value="/quiz/delete/${course.id}/${quiz.id}.html"/>")' ><i class="fa fa-trash-o fa-fw"></i></button></td>
             <td>${quiz.startDate}</td>
             <td>${quiz.endDate}</td>
             <td>N/A</td>
@@ -376,7 +376,7 @@
 	function makeAjaxCallmcq() {
 		$.ajax({
 			type : "post",
-			url : "<spring:url value="/savemcq.html"></spring:url>",
+			url : "<spring:url value="/savemcq.html"/>",
 			cache : false,
 			data : $('#mcqform').serialize(),
 			 success : function(response) {
@@ -427,7 +427,7 @@
 	function makeAjaxCalltf() {
 		$.ajax({
 			type : "post",
-			url : "<spring:url value="/savetf.html"></spring:url>",
+			url : "<spring:url value="/savetf.html"/>",
 			cache : false,
 			data : $('#tfform').serialize(),
 			 success : function(response) {
@@ -446,7 +446,7 @@
 	function makeAjaxCallsq() {
 		$.ajax({
 			type : "post",
-			url : "<spring:url value="/savesq.html"></spring:url>",
+			url : "<spring:url value="/savesq.html"/>",
 			cache : false,
 			data : $('#sqform').serialize(),
 			 success : function(response) {
@@ -465,7 +465,7 @@
        // e.preventDefault();
 		$.ajax({
 			type : "post",
-			url : "<spring:url value="/storequiz/${course.id}.html"></spring:url>",
+			url : "<spring:url value="/storequiz/${course.id}.html"/>",
 			cache : false,
 			data : $('#quizform').serialize(),
 			 success : function(response) {
