@@ -10,8 +10,7 @@
 	<!-- THIS IS COURSE MANAGEMENT PAGE with 4 TAB -->
 	
 	
-	
-	m
+
 	
 
 <%@ include file="../layout/taglib.jsp"%>
