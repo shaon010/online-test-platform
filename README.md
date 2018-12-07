@@ -3,7 +3,7 @@
 DESIGN AND DEVELOPMENT OF ONLINE TEST PLATFORM
 (Final Year Project and Thesis )
 ###Daffodil International University
-DEVELOPED BY:
+
 
 
 
